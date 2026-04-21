@@ -121,6 +121,7 @@
     <ClCompile Include="CoffeMachine.cpp" />
     <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Tdrinks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoffeMachine.h" />
@@ -128,6 +129,7 @@
     <ClInclude Include="MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Tdrinks.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
