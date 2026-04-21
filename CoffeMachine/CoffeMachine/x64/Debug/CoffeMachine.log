@@ -1,0 +1,17 @@
+﻿  MyForm.cpp
+  MyForm.obj : napotkano moduł MSIL; konsolidowanie przyrostowe jest wyłączone dla modułów MSIL; zostanie wykonana pełna konsolidacja
+  CoffeMachine.vcxproj -> C:\Users\kamil\Desktop\studia\VI semestr\Inżynieria Oprogramowania\projekt - kawa\CoffeMachine\x64\Debug\CoffeMachine.exe
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018: Nastąpiło nieoczekiwane niepowodzenie zadania „METAGEN”.
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018: System.IO.FileLoadException: Nie można załadować pliku lub zestawu 'CoffeMachine.exe' lub jednej z jego zależności. Zasady kontroli aplikacji zablokowały ten plik. (Wyjątek od HRESULT: 0x800711C7)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018: Nazwa pliku: 'CoffeMachine.exe' ---> System.Runtime.InteropServices.COMException (0x800711C7): Zasady kontroli aplikacji zablokowały ten plik. (Wyjątek od HRESULT: 0x800711C7)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018: 
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w System.Reflection.AssemblyName.nGetFileInformation(String s)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w Microsoft.Build.CPPTasks.MetaDumper.GenerateAssemblyMeta(String theModule, String refSearchPath)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w Microsoft.Build.CPPTasks.MetaDumper.GenerateAssemblyMeta(String theModule, String refSearchPath)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w Microsoft.Build.CPPTasks.AsmMeta.CreateMeta(String assemblyFileName, String searchPath, String metaFileName)
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w Microsoft.Build.CPPTasks.METAGEN.Execute()
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w Microsoft.Build.BackEnd.TaskExecutionHost.Execute()
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018:    w Microsoft.Build.BackEnd.TaskBuilder.<ExecuteInstantiatedTask>d__26.MoveNext()
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018: 
+C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.MetaGen.targets(52,5): warning MSB4018: 

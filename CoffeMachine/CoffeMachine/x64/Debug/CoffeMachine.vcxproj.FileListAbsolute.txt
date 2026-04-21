@@ -1,0 +1,3 @@
+C:\Users\kamil\Desktop\studia\VI semestr\Inżynieria Oprogramowania\projekt - kawa\CoffeMachine\CoffeMachine\x64\Debug\CoffeMachine.vcxproj.AssemblyReference.cache
+C:\Users\kamil\Desktop\studia\VI semestr\Inżynieria Oprogramowania\projekt - kawa\CoffeMachine\CoffeMachine\x64\Debug\CoffeMachine.MainWindow.resources
+C:\Users\kamil\Desktop\studia\VI semestr\Inżynieria Oprogramowania\projekt - kawa\CoffeMachine\CoffeMachine\x64\Debug\CoffeMachine.vcxproj.GenerateResource.cache
