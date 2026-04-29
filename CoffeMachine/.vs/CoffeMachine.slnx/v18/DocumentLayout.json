@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Tdrinks.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|solutionrelative:Tdrinks.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Tdrinks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|solutionrelative:Tdrinks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\CoffeMachine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|solutionrelative:CoffeMachine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Ingredient.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|solutionrelative:Ingredient.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Tdrinks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|solutionrelative:Tdrinks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Tdrinks.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|solutionrelative:Tdrinks.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3FB6BA49-C852-A48F-8FFA-7A4BB6BA3008}|CoffeMachine.vcxproj|C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\MainWindow.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
@@ -38,11 +38,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Tdrinks.cpp",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Tdrinks.cpp",
               "RelativeDocumentMoniker": "Tdrinks.cpp",
@@ -50,12 +54,11 @@
               "RelativeToolTip": "Tdrinks.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-21T12:19:42.203Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-21T12:19:42.203Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Tdrinks.h",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Tdrinks.h",
               "RelativeDocumentMoniker": "Tdrinks.h",
@@ -63,12 +66,11 @@
               "RelativeToolTip": "Tdrinks.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-21T12:19:31.309Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-21T12:19:31.309Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "CoffeMachine.h",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\CoffeMachine.h",
               "RelativeDocumentMoniker": "CoffeMachine.h",
@@ -81,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Ingredient.h",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\POIiO-2026_KamilKopyra_FilipMaterowski_JakubKiraga_projekt\\CoffeMachine\\Ingredient.h",
               "RelativeDocumentMoniker": "Ingredient.h",
