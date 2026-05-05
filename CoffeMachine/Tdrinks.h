@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 
 // Czym jest kawa?
 /* 
@@ -11,15 +12,23 @@ Od tego czasu nasze życie nie wyglądało już tak samo...
 
 class Tdrinks
 {
+	
 	std::string name;
 	float volume;
 	float volumeOfMilk;
-	int power;  // Power = (1,2,3,4,5) default = 3 
+	int power;  // Power = (1,2,3,4,5) default = 3
+
+	
 public:
-	Tdrinks(std::string name, int volume, int volumeofMilk, int power);
+	
+	static std::vector<Tdrinks> drinks;
+	Tdrinks(std::string name, int volume, int volumeofMilk);
 	std::string getName();
 	int getPowerOfCoffe();
 	bool hasMilk();
 	int getVolume();
 	int getVolumeOfMilk();
+	static void addDrink(Tdrinks drink);
+	static void removeDrink(std::string name);
+
 };

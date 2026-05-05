@@ -12,23 +12,35 @@ Tdrinks::Tdrinks(std::string name, int volume, int volumeofMilk)
 }
 
 // Returns the name of the drink
-std::string getName()
+std::string Tdrinks::getName()
 {
 	return name;
 }
 // Returns the volume of the drink
-int getVolume()
+int Tdrinks::getVolume()
 {
-	return volume + volumeofMilk;
+	return volume + volumeOfMilk;
 }
-int getVolumeOfMilk()
+int Tdrinks::getVolumeOfMilk()
 {
 	return volumeOfMilk;
 }
+void Tdrinks::addDrink(Tdrinks drink) {
+	drinks.push_back(drink);
+}
+void Tdrinks::removeDrink(std::string name) {
+	for (int i = 0; i < drinks.size(); i++) {
+		if (drinks[i].getName() == name) {
+			drinks.erase(drinks.begin() + i);
+			return;
+		}
+	}
+}
+
 // List of drinks with their names and volumes
-std::vector <Tdrinks> drinks = {
+std::vector<Tdrinks> Tdrinks::drinks = {
 	Tdrinks("Black Coffee", 250, 0),
 	Tdrinks("Latte", 200, 100),
 	Tdrinks("Cappuccino", 100, 250),
 	Tdrinks("Espresso", 100, 0)
-}
+};
