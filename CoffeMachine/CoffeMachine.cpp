@@ -1,23 +1,30 @@
 #include "CoffeMachine.h"
 
-int CoffeMachine::getMachineStatus() {
+CoffeMachine::CoffeMachine() {
+}
+void CoffeMachine::updateMachineStatus() {
 	// Implementation to return the current status of the machine
-	
-	
-	bool milkStatus = checkIngredients("Milk");
-	bool waterStatus = checkIngredients("Water");
-	bool beansStatus = checkIngredients("Beans");
-	
-	if(milkStatus && waterStatus && beansStatus) {
-		return 1; // wszystkie składniki są dostępne
-	}
-	else if (!waterStatus) {return 2;} // brak wody
-	else if (!beansStatus) {return 3;} // brak ziaren kawy
-	else if (!milkStatus) {return 4;} // brak mleka
+
+
+	hasMilk = milk.isEnough();
+	hasWater = water.isEnough();
+	hasBeans = beans.isEnough();
+
 }
 
 
-bool CoffeMachine::checkIngredients(std::string type)
+void CoffeMachine::initializeMachine() 
 {
-	return true;
+	water = Ingredient("Water", maxWaterCapacity/2, maxWaterCapacity, waterMinThreshold);
+	beans = Ingredient("Beans", maxBeansCapacity/2, maxBeansCapacity, beansMinThreshold);
+	milk = Ingredient("Milk", maxMilkCapacity/2, maxMilkCapacity, milkMinThreshold);
+
+	isOperational = true;
+	isClean = true;
+	cupsServed = 0;
+}
+
+void CoffeMachine::cleanMachine() {
+	isClean = true;
+	history.push_back("Machine cleaned");
 }

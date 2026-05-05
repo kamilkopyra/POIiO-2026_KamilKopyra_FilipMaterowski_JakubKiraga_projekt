@@ -1,6 +1,9 @@
 #pragma once
+#include "CoffeMachine.h"
+#include <msclr/marshal_cppstd.h>
 
-namespace CoffeMachine {
+
+
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -18,7 +21,11 @@ namespace CoffeMachine {
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
+			machine = new CoffeMachine();
+			
+
+			machine->initializeMachine();
+			//System::Windows::Forms::MessageBox::Show("Zainicjowano ekspres do kawy!");
 			//TODO: W tym miejscu dodaj kod konstruktora
 			//
 		}
@@ -54,6 +61,9 @@ namespace CoffeMachine {
 		/// Wymagana zmienna projektanta.
 		/// </summary>
 		System::ComponentModel::Container ^components;
+		CoffeMachine* machine;
+
+	
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -219,4 +229,7 @@ namespace CoffeMachine {
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
-}
+
+
+
+

@@ -2,23 +2,27 @@
 #include <string>
 #include "Ingredient.h"
 #include "Tdrinks.h"
+#include <vector>
 
 class CoffeMachine 
 {
 public:
+	CoffeMachine();
+	~CoffeMachine();
 
-	int getMachineStatus();
+	void updateMachineStatus();
+
 	int getMachineStatistics();
 	int diagnoseMachine();
 	int repairMachine();
 	
-	bool makeCoffee(std::string type);
+	bool makeCoffee(Tdrinks drink);
 	void initializeMachine();
 	void addWater(int amount);
 	void addBeans(int amount);
 	
 	void cleanMachine();
-
+	std::vector<std::string> getHistory();
 private:
 	Ingredient water;
 	Ingredient beans;
@@ -27,15 +31,19 @@ private:
 	int cupsServed;
 	bool isOperational;
 	bool isClean;
-	bool hasWater;
-	bool hasBeans;
-	bool hasMilk;
+	bool hasWater = false;
+	bool hasBeans = false;
+	bool hasMilk = false;
 
 
 	int maxWaterCapacity = 2000; // in milliliters
 	int maxBeansCapacity = 500; // in grams
 	int maxMilkCapacity = 1000; // in milliliters
 
-	bool checkIngredients(std::string type);
+	int waterMinThreshold = 200; // in milliliters
+	int beansMinThreshold = 50; // in grams
+	int milkMinThreshold = 100; // in milliliters
 
+	bool checkIngredients(std::string type);
+	std::vector<std::string> history;
 };

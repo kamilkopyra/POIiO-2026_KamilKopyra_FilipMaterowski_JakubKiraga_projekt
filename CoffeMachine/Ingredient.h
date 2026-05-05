@@ -1,13 +1,23 @@
 #pragma once
 #include <string>
 
+class Ingredient
+{
+public:
+    Ingredient();
+    Ingredient(std::string name, int amount, int capacity, int minThreshold);
 
-class Ingredient {
-        std::string name;
-        int quantity;     
-        int capacity;     
-    public:
-        bool isEnough(int needed);
-        void consume(int amount);
-        void refill();
+    std::string getName();
+    int getAmount();
+    int getCapacity();
+    int getMinThreshold();
+    bool isEnough();
+    void consume(int value);
+    void refill(int value);
+
+private:
+    std::string name;
+    int amount;
+    int capacity;
+    int minThreshold;
 };
