@@ -4,7 +4,7 @@
 #include "Tdrinks.h"
 
 // Constructor to initialize the name and volume of the drink
-Tdrinks::Tdrinks(std::string name, int volume, int volumeofMilk)
+Tdrinks::Tdrinks(std::string name, float volume, float volumeofMilk)
 {
 	this->name = name;
 	this->volume = volume;
@@ -17,17 +17,29 @@ std::string Tdrinks::getName()
 	return name;
 }
 // Returns the volume of the drink
-int Tdrinks::getVolume()
+float Tdrinks::getVolume()
 {
 	return volume + volumeOfMilk;
 }
-int Tdrinks::getVolumeOfMilk()
+float Tdrinks::getVolumeOfMilk()
 {
 	return volumeOfMilk;
 }
+
+void Tdrinks::editVolume(float newVolume) {
+	volume = newVolume;
+}
+void Tdrinks::editVolumeOfMilk(float newVolumeOfMilk) {
+	volumeOfMilk = newVolumeOfMilk;
+}
+void Tdrinks::editPower(int newPower) {
+	power = newPower;
+}
+
 void Tdrinks::addDrink(Tdrinks drink) {
 	drinks.push_back(drink);
 }
+
 void Tdrinks::removeDrink(std::string name) {
 	for (int i = 0; i < drinks.size(); i++) {
 		if (drinks[i].getName() == name) {
