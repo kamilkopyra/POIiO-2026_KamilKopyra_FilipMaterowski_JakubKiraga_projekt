@@ -28,6 +28,7 @@ public:
 	bool hasMilk();
 	float getVolume();
 	float getVolumeOfMilk();
+	void show();
 
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);

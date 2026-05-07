@@ -26,6 +26,13 @@ float Tdrinks::getVolumeOfMilk()
 	return volumeOfMilk;
 }
 
+void Tdrinks::show() 
+{
+	std::cout << "Nazwa" << getName() << "\n";
+	std::cout << "Ilość kawy i mleka" << getVolume() << "\n";
+	std::cout << "Ilość mleka" << getVolumeOfMilk() << "\n";
+}
+
 void Tdrinks::editVolume(float newVolume) {
 	volume = newVolume;
 }
