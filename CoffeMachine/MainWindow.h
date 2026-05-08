@@ -62,6 +62,8 @@
 		/// </summary>
 		System::ComponentModel::Container ^components;
 		CoffeMachine* machine;
+		int currentDrinkIndex = 0;
+		bool menuActive = false;
 
 	
 
@@ -96,6 +98,9 @@
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Rozpocznij";
 			this->button1->UseVisualStyleBackColor = true;
+         this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			this->KeyPreview = true;
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::MyForm_KeyDown);
 			// 
 			// textBox1
 			// 
@@ -213,6 +218,38 @@
 
 		}
 #pragma endregion
+
+          // Update the textbox to show the currently selected drink
+		void updateDrinkDisplay() {
+			if (!menuActive) return;
+			if (Tdrinks::drinks.size() == 0) {
+				this->textBox1->Text = L"Brak napojow";
+				return;
+			}
+			std::string name = Tdrinks::drinks[currentDrinkIndex].getName();
+			System::String^ sname = msclr::interop::marshal_as<System::String^>(name);
+			this->textBox1->Text = sname;
+		}
+
+		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Activate sliding menu and show first drink
+			menuActive = true;
+			currentDrinkIndex = 0;
+			updateDrinkDisplay();
+		}
+
+		System::Void MyForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+			if (!menuActive) return;
+			if (Tdrinks::drinks.size() == 0) return;
+			if (e->KeyCode == System::Windows::Forms::Keys::Right) {
+				currentDrinkIndex = (currentDrinkIndex + 1) % (int)Tdrinks::drinks.size();
+				updateDrinkDisplay();
+			}
+			else if (e->KeyCode == System::Windows::Forms::Keys::Left) {
+				currentDrinkIndex = (currentDrinkIndex - 1 + (int)Tdrinks::drinks.size()) % (int)Tdrinks::drinks.size();
+				updateDrinkDisplay();
+			}
+		}
 	private: System::Void zamknijToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 		System::Windows::Forms::DialogResult answer;
@@ -226,9 +263,12 @@
 	
 	
 	}
-private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
+	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
 };
+
+
+
 
 
 
