@@ -22,13 +22,14 @@ class Tdrinks
 public:
 	
 	static std::vector<Tdrinks> drinks;
-	Tdrinks(std::string name, float volume, float volumeofMilk);
+	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
 	std::string getName();
 	int getPowerOfCoffe();
 	bool hasMilk();
 	float getVolume();
 	float getVolumeOfMilk();
 	void show();
+	int getAmountOfCoffee();
 
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);

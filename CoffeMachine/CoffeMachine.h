@@ -20,7 +20,9 @@ public:
 	void initializeMachine();
 	void addWater(int amount);
 	void addBeans(int amount);
+	void addMilk(int amount);
 	
+	void descaling();
 	void cleanMachine();
 	std::vector<std::string> getHistory();
 private:
@@ -44,6 +46,7 @@ private:
 	int beansMinThreshold = 50; // in grams
 	int milkMinThreshold = 100; // in milliliters
 
-	bool checkIngredients(std::string type);
+	bool checkIngredientsFor(Tdrinks drink);
 	std::vector<std::string> history;
+
 };
