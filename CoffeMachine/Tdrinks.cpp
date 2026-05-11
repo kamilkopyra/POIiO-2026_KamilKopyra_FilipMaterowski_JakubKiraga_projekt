@@ -26,12 +26,17 @@ float Tdrinks::getVolumeOfMilk()
 {
 	return volumeOfMilk;
 }
+int Tdrinks::getPowerOfCoffe()
+{
+	return power;
+}
 
 void Tdrinks::show() 
 {
 	std::cout << "Nazwa: " << getName() << "\n";
 	std::cout << "Ilosc kawy i mleka:  " << getVolume() << " ml\n";
 	std::cout << "Ilosc mleka:  " << getVolumeOfMilk() << " ml\n";
+	std::cout << "Moc: " << getPowerOfCoffe() << "\n";
 }
 
 void Tdrinks::editVolume(float newVolume) {

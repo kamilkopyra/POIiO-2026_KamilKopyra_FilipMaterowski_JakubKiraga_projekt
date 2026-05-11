@@ -61,12 +61,6 @@ void CoffeMachine::descaling()
 	history.push_back("Machine descaled");
 }
 
-void CoffeMachine::cleanMachine() 
-{
-	isClean = true;
-	history.push_back("Machine cleaned");
-}
-
 bool CoffeMachine::checkIngredientsFor(Tdrinks drink) 
 {
 	return water.getCapacity() >= drink.getVolume() && milk.getCapacity() >= drink.getVolumeOfMilk() && beans.getCapacity() >= drink.getAmountOfCoffee();
