@@ -122,7 +122,6 @@
     <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Tdrinks.cpp" />
-    <ClCompile Include="terminalMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoffeMachine.h" />
