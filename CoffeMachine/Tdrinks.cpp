@@ -9,6 +9,7 @@ Tdrinks::Tdrinks(std::string name, float volume, float volumeofMilk)
 	this->name = name;
 	this->volume = volume;
 	this->volumeOfMilk = volumeofMilk;
+	this->power = 3; // Default power
 }
 
 // Returns the name of the drink
@@ -25,12 +26,16 @@ float Tdrinks::getVolumeOfMilk()
 {
 	return volumeOfMilk;
 }
+int Tdrinks::getPowerOfCoffe() {
+	return power;
+}
 
 void Tdrinks::show() 
 {
-	std::cout << "Nazwa" << getName() << "\n";
-	std::cout << "Ilość kawy i mleka" << getVolume() << "\n";
-	std::cout << "Ilość mleka" << getVolumeOfMilk() << "\n";
+	std::cout << "Nazwa " << getName() << "\n";
+	std::cout << "Ilosc kawy i mleka " << getVolume() << "\n";
+	std::cout << "Ilosc mleka " << getVolumeOfMilk() << "\n";
+	std::cout << "Moc " << getPowerOfCoffe() << "\n";
 }
 
 void Tdrinks::editVolume(float newVolume) {

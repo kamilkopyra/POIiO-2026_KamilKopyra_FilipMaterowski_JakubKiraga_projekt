@@ -18,18 +18,18 @@ class Tdrinks
 	float volumeOfMilk;
 	int power;  // Power = (1,2,3,4,5) default = 3
 
-	
-public:
-	
-	static std::vector<Tdrinks> drinks;
-	Tdrinks(std::string name, float volume, float volumeofMilk);
+private:
 	std::string getName();
 	int getPowerOfCoffe();
 	bool hasMilk();
 	float getVolume();
 	float getVolumeOfMilk();
+	
+public:
+	
+	static std::vector<Tdrinks> drinks;
+	Tdrinks(std::string name, float volume, float volumeofMilk);
 	void show();
-
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);
 	void editPower(int newPower);
