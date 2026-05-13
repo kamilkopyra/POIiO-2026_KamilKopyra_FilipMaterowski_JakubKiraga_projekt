@@ -8,7 +8,7 @@ class CoffeMachine
 {
 public:
 	CoffeMachine();
-	~CoffeMachine();
+	//~CoffeMachine();
 
 	void updateMachineStatus();
 
@@ -16,7 +16,7 @@ public:
 	int diagnoseMachine();
 	int repairMachine();
 	
-	bool makeCoffee(Tdrinks drink);
+	void makeCoffee(Tdrinks drink);
 	void initializeMachine();
 	void addWater(int amount);
 	void addBeans(int amount);
@@ -47,6 +47,7 @@ private:
 	int milkMinThreshold = 100; // in milliliters
 
 	bool checkIngredientsFor(Tdrinks drink);
+	void checkIngredientsForFeedback(Tdrinks drink);
 	std::vector<std::string> history;
 
 };

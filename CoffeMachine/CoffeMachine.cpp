@@ -63,6 +63,47 @@ void CoffeMachine::descaling()
 
 bool CoffeMachine::checkIngredientsFor(Tdrinks drink) 
 {
-	return water.getCapacity() >= drink.getVolume() && milk.getCapacity() >= drink.getVolumeOfMilk() && beans.getCapacity() >= drink.getAmountOfCoffee();
+	return water.getAmount() >= drink.getVolumeOfWater() && milk.getCapacity() >= drink.getVolumeOfMilk() && beans.getCapacity() >= drink.getAmountOfCoffee();
 }
 
+void CoffeMachine::checkIngredientsForFeedback(Tdrinks drink)
+{
+	if (water.getAmount() < drink.getVolumeOfWater())
+	{
+		std::cout << "Add water\n";
+	}
+	else if (milk.getAmount() < drink.getVolumeOfMilk())
+	{
+		std::cout << "Add milk\n";
+	}
+	else if(beans.getAmount() < drink.getAmountOfCoffee())
+	{
+		std::cout << "Add beans\n";
+	}
+	else
+	{
+		std::cout << "Error: ckeckIngredientsForFeedback()";
+	}
+}
+
+void CoffeMachine::makeCoffee(Tdrinks drink)
+{
+	bool enoughIngredients = checkIngredientsFor(drink);
+
+	if (enoughIngredients)
+	{
+		water.consume(drink.getVolumeOfWater());
+		milk.consume(drink.getVolumeOfMilk());
+		beans.consume(drink.getAmountOfCoffee());
+
+		std::cout << drink.getName() <<" was made\n";
+		std::cout << "Used " << drink.getVolumeOfWater() << "ml of water, " << drink.getVolumeOfMilk() << "ml of milk, and " << drink.getAmountOfCoffee() << "g of coffee\n";
+		std::cout << "Remaining: " << water.getAmount() << "ml of water, " << milk.getAmount() << "ml of milk, and " << beans.getAmount() << "g of coffee\n";
+	}
+	else
+	{
+		checkIngredientsForFeedback(drink);
+	}
+
+
+}

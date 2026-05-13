@@ -21,15 +21,16 @@ class Tdrinks
 	
 public:
 	
-	static std::vector<Tdrinks> drinks;
 	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
 	std::string getName();
+	int getDrinkId(std::string name);
 	int getPowerOfCoffe();
 	bool hasMilk();
 	float getVolume();
 	float getVolumeOfMilk();
+	float Tdrinks::getVolumeOfWater();
 	void show();
-	int getAmountOfCoffee();
+	double getAmountOfCoffee();
 
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);
@@ -39,3 +40,5 @@ public:
 	static void removeDrink(std::string name);
 
 };
+
+extern std::vector<Tdrinks> drinks;

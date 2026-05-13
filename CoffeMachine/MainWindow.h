@@ -222,11 +222,11 @@
           // Update the textbox to show the currently selected drink
 		void updateDrinkDisplay() {
 			if (!menuActive) return;
-			if (Tdrinks::drinks.size() == 0) {
+			if (drinks.size() == 0) {
 				this->textBox1->Text = L"Brak napojow";
 				return;
 			}
-			std::string name = Tdrinks::drinks[currentDrinkIndex].getName();
+			std::string name = drinks[currentDrinkIndex].getName();
 			System::String^ sname = msclr::interop::marshal_as<System::String^>(name);
 			this->textBox1->Text = sname;
 		}
@@ -240,13 +240,13 @@
 
 		System::Void MyForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 			if (!menuActive) return;
-			if (Tdrinks::drinks.size() == 0) return;
+			if (drinks.size() == 0) return;
 			if (e->KeyCode == System::Windows::Forms::Keys::Right) {
-				currentDrinkIndex = (currentDrinkIndex + 1) % (int)Tdrinks::drinks.size();
+				currentDrinkIndex = (currentDrinkIndex + 1) % (int)drinks.size();
 				updateDrinkDisplay();
 			}
 			else if (e->KeyCode == System::Windows::Forms::Keys::Left) {
-				currentDrinkIndex = (currentDrinkIndex - 1 + (int)Tdrinks::drinks.size()) % (int)Tdrinks::drinks.size();
+				currentDrinkIndex = (currentDrinkIndex - 1 + (int)drinks.size()) % (int)drinks.size();
 				updateDrinkDisplay();
 			}
 		}
