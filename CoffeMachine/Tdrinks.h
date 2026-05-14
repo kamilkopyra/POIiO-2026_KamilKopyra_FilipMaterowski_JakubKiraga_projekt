@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+
 // Czym jest kawa?
 /* 
 Historia kawy rozpoczęła się w Etiopii (rejon Kaffa), gdzie według legendy pobudzające właściwości owoców kawowca odkrył pasterz,
@@ -17,24 +18,31 @@ class Tdrinks
 	float volume;
 	float volumeOfMilk;
 	int power;  // Power = (1,2,3,4,5) default = 3
-
-private:
-	std::string getName();
-	int getPowerOfCoffe();
-	bool hasMilk();
-	float getVolume();
-	float getVolumeOfMilk();
+	
 	
 public:
 	
 	static std::vector<Tdrinks> drinks;
-	Tdrinks(std::string name, float volume, float volumeofMilk);
+	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
+	std::string getName();
+	int Tdrinks::getDrinkId(std::string name);
+	int getPowerOfCoffe();
+	bool hasMilk();
+	float getVolume();
+	float getVolumeOfMilk();
+	float Tdrinks::getVolumeOfWater();
 	void show();
+	int getAmountOfCoffee();
+
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);
 	void editPower(int newPower);
 
-	static void addDrink(Tdrinks drink);
+	static void addDrink(std::string name, float volume, float volumeOfMilk, int power);
 	static void removeDrink(std::string name);
 
+	static Tdrinks* getDrinkByName(std::string name);
+
 };
+
+

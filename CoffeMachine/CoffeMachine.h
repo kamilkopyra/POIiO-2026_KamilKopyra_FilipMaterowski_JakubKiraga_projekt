@@ -8,7 +8,7 @@ class CoffeMachine
 {
 public:
 	CoffeMachine();
-	~CoffeMachine();
+	~CoffeMachine() = default;
 
 	void updateMachineStatus();
 
@@ -16,7 +16,7 @@ public:
 	int diagnoseMachine();
 	int repairMachine();
 	
-	bool makeCoffee(Tdrinks drink);
+	bool makeCoffee(std::string drinkName);
 	void initializeMachine();
 	void addWater(int amount);
 	void addBeans(int amount);
@@ -25,12 +25,17 @@ public:
 	void descaling();
 	void cleanMachine();
 	std::vector<std::string> getHistory();
+
+
+	void printStatus();
+	void printHistory();
 private:
 	Ingredient water;
 	Ingredient beans;
 	Ingredient milk;
 
 	int cupsServed;
+	int cupsSinceLastCleaning;
 	bool isOperational;
 	bool isClean;
 	bool hasWater = false;
@@ -47,6 +52,7 @@ private:
 	int milkMinThreshold = 100; // in milliliters
 
 	bool checkIngredientsFor(Tdrinks drink);
+	void checkIngredientsForFeedback(Tdrinks drink);
 	std::vector<std::string> history;
 
 };
