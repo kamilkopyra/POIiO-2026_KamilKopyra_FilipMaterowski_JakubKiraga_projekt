@@ -24,6 +24,8 @@ public:
 	
 	static std::vector<Tdrinks> drinks;
 	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
+	~Tdrinks()=default;
+	static void showAll();
 	std::string getName();
 	int Tdrinks::getDrinkId(std::string name);
 	int getPowerOfCoffe();

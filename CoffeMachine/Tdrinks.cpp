@@ -12,6 +12,12 @@ Tdrinks::Tdrinks(string name, float volume, float volumeofMilk, int power)
 	this->volumeOfMilk = volumeofMilk;
 	this->power = power;
 }
+ void Tdrinks::showAll() {
+	for (int i = 0; i < drinks.size(); i++) {
+		std::cout << drinks[i].getName() << endl;
+	}
+}
+
 int Tdrinks::getDrinkId(string name)
 {
 	int count = drinks.size();
