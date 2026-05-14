@@ -24,7 +24,7 @@
 			machine = new CoffeMachine();
 			
 
-			machine->initializeMachine();
+			//machine->initializeMachine();
 			//System::Windows::Forms::MessageBox::Show("Zainicjowano ekspres do kawy!");
 			//TODO: W tym miejscu dodaj kod konstruktora
 			//
@@ -240,13 +240,13 @@
 
 		System::Void MyForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 			if (!menuActive) return;
-			if (Tdrinks::drinks.size() == 0) return;
+			if (Tdrinks::drinks.size() == 0) return;  
 			if (e->KeyCode == System::Windows::Forms::Keys::Right) {
-				currentDrinkIndex = (currentDrinkIndex + 1) % (int)Tdrinks::drinks.size();
+				currentDrinkIndex = (currentDrinkIndex + 1) % (int)Tdrinks::drinks.size();  
 				updateDrinkDisplay();
 			}
 			else if (e->KeyCode == System::Windows::Forms::Keys::Left) {
-				currentDrinkIndex = (currentDrinkIndex - 1 + (int)Tdrinks::drinks.size()) % (int)Tdrinks::drinks.size();
+				currentDrinkIndex = (currentDrinkIndex - 1 + (int)Tdrinks::drinks.size()) % (int)Tdrinks::drinks.size(); 
 				updateDrinkDisplay();
 			}
 		}

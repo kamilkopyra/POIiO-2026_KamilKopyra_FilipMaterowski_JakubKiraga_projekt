@@ -2,18 +2,17 @@
 #include <string>
 #include <vector>
 #include "Tdrinks.h"
+using namespace std;
 
 // Constructor to initialize the name and volume of the drink
-Tdrinks::Tdrinks(std::string name, float volume, float volumeofMilk, int power)
+Tdrinks::Tdrinks(string name, float volume, float volumeofMilk, int power)
 {
 	this->name = name;
 	this->volume = volume;
 	this->volumeOfMilk = volumeofMilk;
 	this->power = power;
 }
-
-
-int Tdrinks::getDrinkId(std::string name)
+int Tdrinks::getDrinkId(string name)
 {
 	int count = drinks.size();
 	int _id = -1;
@@ -22,19 +21,20 @@ int Tdrinks::getDrinkId(std::string name)
 	while (run)
 	{
 		_id += 1;
-		std::string sub_name = drinks[_id].getName();
+		string sub_name = drinks[_id].getName();
 
 		if (sub_name == name) run = false;
 
 		if ((_id + 1 == count) && (run == true))
 		{
-			std::cout << "Nie znaleziono plynu o podanej nazwie: \"" << name << "\"!\n";
+			cout << "Nie znaleziono plynu o podanej nazwie: \"" << name << "\"!\n";
 			run = false;
 			_id = -1;
 		}
 	}
 	return _id;
 }
+
 
 // Returns the name of the drink
 std::string Tdrinks::getName()
@@ -54,6 +54,8 @@ float Tdrinks::getVolumeOfMilk()
 {
 	return volumeOfMilk;
 }
+
+
 int Tdrinks::getPowerOfCoffe()
 {
 	return power;

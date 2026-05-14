@@ -52,6 +52,7 @@ private:
 	int milkMinThreshold = 100; // in milliliters
 
 	bool checkIngredientsFor(Tdrinks drink);
+	void checkIngredientsForFeedback(Tdrinks drink);
 	std::vector<std::string> history;
 
 };

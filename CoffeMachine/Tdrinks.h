@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
+
 
 // Czym jest kawa?
 /* 
@@ -18,7 +18,7 @@ class Tdrinks
 	float volume;
 	float volumeOfMilk;
 	int power;  // Power = (1,2,3,4,5) default = 3
-
+	
 	
 public:
 	
@@ -30,9 +30,9 @@ public:
 	bool hasMilk();
 	float getVolume();
 	float getVolumeOfMilk();
+	float Tdrinks::getVolumeOfWater();
 	void show();
 	int getAmountOfCoffee();
-	float Tdrinks::getVolumeOfWater();
 
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);
@@ -44,3 +44,5 @@ public:
 	static Tdrinks* getDrinkByName(std::string name);
 
 };
+
+
