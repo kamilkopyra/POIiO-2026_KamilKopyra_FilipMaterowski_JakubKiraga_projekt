@@ -39,5 +39,6 @@ void Ingredient::refill(int value)
     amount += value;
     if (amount > capacity) {
         amount = capacity;
+		std::cout<< "Przekroczono pojemnosc skladnika " << name << ". Ilosc zostala uzupelniona do maksymalnej pojemnosci.\n";
     }
 }

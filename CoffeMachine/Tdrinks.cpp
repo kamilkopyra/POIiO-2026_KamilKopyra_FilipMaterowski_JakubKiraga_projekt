@@ -12,6 +12,30 @@ Tdrinks::Tdrinks(std::string name, float volume, float volumeofMilk, int power)
 	this->power = power;
 }
 
+
+int Tdrinks::getDrinkId(std::string name)
+{
+	int count = drinks.size();
+	int _id = -1;
+	bool run = true;
+
+	while (run)
+	{
+		_id += 1;
+		std::string sub_name = drinks[_id].getName();
+
+		if (sub_name == name) run = false;
+
+		if ((_id + 1 == count) && (run == true))
+		{
+			std::cout << "Nie znaleziono plynu o podanej nazwie: \"" << name << "\"!\n";
+			run = false;
+			_id = -1;
+		}
+	}
+	return _id;
+}
+
 // Returns the name of the drink
 std::string Tdrinks::getName()
 {
@@ -21,6 +45,10 @@ std::string Tdrinks::getName()
 float Tdrinks::getVolume()
 {
 	return volume + volumeOfMilk;
+}
+float Tdrinks::getVolumeOfWater()
+{
+	return volume;
 }
 float Tdrinks::getVolumeOfMilk()
 {
@@ -33,10 +61,14 @@ int Tdrinks::getPowerOfCoffe()
 
 void Tdrinks::show() 
 {
+	std::cout << "Informacje o napoju:\n";
 	std::cout << "Nazwa: " << getName() << "\n";
-	std::cout << "Ilosc kawy i mleka:  " << getVolume() << " ml\n";
+	std::cout << "Ilosc kawy :  " << getVolume() << " ml\n";
+	std::cout << "Ilosc wody:  " << getVolumeOfWater() << " ml\n";
 	std::cout << "Ilosc mleka:  " << getVolumeOfMilk() << " ml\n";
 	std::cout << "Moc: " << getPowerOfCoffe() << "\n";
+	std::cout << "Ilosc ziaren kawy: " << getAmountOfCoffee() << " g\n";
+	std::cout << "----------------------------\n";
 }
 
 void Tdrinks::editVolume(float newVolume) {
@@ -49,8 +81,10 @@ void Tdrinks::editPower(int newPower) {
 	power = newPower;
 }
 
-void Tdrinks::addDrink(Tdrinks drink) {
-	drinks.push_back(drink);
+
+// zmieni³em ¿eby dodawanie by³o ³atwiejsze, napój jest dodawany bezpoœrednio do wektora po utworzeniu
+void Tdrinks::addDrink(std::string name, float volume, float volumeOfMilk, int power) {
+	drinks.push_back(Tdrinks(name, volume, volumeOfMilk, power));
 }
 
 void Tdrinks::removeDrink(std::string name) {
@@ -62,37 +96,50 @@ void Tdrinks::removeDrink(std::string name) {
 	}
 }
 int Tdrinks::getAmountOfCoffee() {
-	int AmountPerVolume;
+	float AmountPerVolume;
 	switch (power) {
 	case 1:
-		AmountPerVolume = 8/250;
+		AmountPerVolume = 8.0/250.0;
 		break;
 	case 2:
-		AmountPerVolume = 10/250;
+		AmountPerVolume = 10.0/250.0;
 		break;
 	case 3:
-		AmountPerVolume = 14/250;
+		AmountPerVolume = 14.0/250.0;
 		break;
 	case 4:
-		AmountPerVolume = 16/250;
+		AmountPerVolume = 16.0/250.0;
 		break;
 	case 5:
-		AmountPerVolume = 18/250;
+		AmountPerVolume = 18.0/250.0;
 		break;
 	default:
 		std::cout << "Invalid power level. Setting to default (3).\n";
 		power = 3;
-		AmountPerVolume = 14 / 250;
+		AmountPerVolume = 14.0 / 250.0;
 		break;
 
-		return AmountPerVolume * volume;
+
 	}
+	return int(AmountPerVolume * volume);
 }
 
 // List of drinks with their names and volumes
+// (nazwa, iloœæ wody, iloœæ mleka, moc)
 std::vector<Tdrinks> Tdrinks::drinks = {
 	Tdrinks("Black Coffee", 250, 0, 4),
 	Tdrinks("Latte", 200, 100, 2),
 	Tdrinks("Cappuccino", 100, 250, 3),
 	Tdrinks("Espresso", 100, 0, 5)
 };
+
+
+// funkcja do znajdywania napoju po nazwie
+Tdrinks* Tdrinks::getDrinkByName(std::string name) {
+	for (auto& drink : drinks) {
+		if (drink.getName() == name) {
+			return &drink;
+		}
+	}
+	return nullptr;  
+}

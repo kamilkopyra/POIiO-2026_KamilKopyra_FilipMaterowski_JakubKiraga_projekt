@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 // Czym jest kawa?
 /* 
@@ -24,18 +25,22 @@ public:
 	static std::vector<Tdrinks> drinks;
 	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
 	std::string getName();
+	int Tdrinks::getDrinkId(std::string name);
 	int getPowerOfCoffe();
 	bool hasMilk();
 	float getVolume();
 	float getVolumeOfMilk();
 	void show();
 	int getAmountOfCoffee();
+	float Tdrinks::getVolumeOfWater();
 
 	void editVolume(float newVolume);
 	void editVolumeOfMilk(float newVolumeOfMilk);
 	void editPower(int newPower);
 
-	static void addDrink(Tdrinks drink);
+	static void addDrink(std::string name, float volume, float volumeOfMilk, int power);
 	static void removeDrink(std::string name);
+
+	static Tdrinks* getDrinkByName(std::string name);
 
 };
