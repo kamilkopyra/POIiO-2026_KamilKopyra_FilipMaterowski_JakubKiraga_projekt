@@ -67,7 +67,7 @@ int main(array<String^>^ args) {
 
 	std::cout << "\n\n\n";
 	// Prezentacja logiki klasy Tdrinks
-	Tdrinks drink("espresso", 30, 0, 3);
+	Tdrinks drink("ekspresso", 30, 0, 3);
 
 	std::cout << "Funkcja Tdrinks::show()" << std::endl;
 	drink.show();
@@ -77,7 +77,14 @@ int main(array<String^>^ args) {
 	std::cout << "Po edycji:" << std::endl;
 	drink.show();
 
+	std::cout << "==== Wszystkie napoje ====" << std::endl;
+	Tdrinks::showAll();
+	std::cout << "==== Usuniêcie napoju \"ekspresso\" ====" << std::endl;
+	Tdrinks::removeDrink("ekspresso"); // usuniêcie napoju z listy
+	std::cout << "==== Wszystkie napoje ====" << std::endl;
+	Tdrinks::showAll();
 
+	
 
 	std::cin.get();
     return 0;
