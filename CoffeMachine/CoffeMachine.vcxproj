@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="CoffeMachine.cpp" />
     <ClCompile Include="Ingredient.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Tdrinks.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -27,32 +27,6 @@
      <string>Start</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>470</y>
-      <width>81</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Options</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>500</y>
-      <width>81</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Statistics</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -63,8 +37,63 @@
      <height>33</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuCoffe_Machine">
+    <property name="title">
+     <string>Coffe Machine</string>
+    </property>
+    <addaction name="actionEdit_the_drinks_menu"/>
+    <addaction name="separator"/>
+    <addaction name="actionShutdown"/>
+   </widget>
+   <widget class="QMenu" name="menuStatistics">
+    <property name="title">
+     <string>Statistics</string>
+    </property>
+    <addaction name="actionIgredients_status"/>
+   </widget>
+   <widget class="QMenu" name="menuService">
+    <property name="title">
+     <string>Service</string>
+    </property>
+    <addaction name="actionAdd_Ingredients"/>
+    <addaction name="actionCleam"/>
+    <addaction name="actionCall_for_technician"/>
+   </widget>
+   <addaction name="menuCoffe_Machine"/>
+   <addaction name="menuStatistics"/>
+   <addaction name="menuService"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionShutdown">
+   <property name="text">
+    <string>Shutdown</string>
+   </property>
+  </action>
+  <action name="actionEdit_the_drinks_menu">
+   <property name="text">
+    <string>Edit the drinks menu</string>
+   </property>
+  </action>
+  <action name="actionIgredients_status">
+   <property name="text">
+    <string>Igredients status</string>
+   </property>
+  </action>
+  <action name="actionAdd_Ingredients">
+   <property name="text">
+    <string>Add Ingredients</string>
+   </property>
+  </action>
+  <action name="actionCleam">
+   <property name="text">
+    <string>Cleam</string>
+   </property>
+  </action>
+  <action name="actionCall_for_technician">
+   <property name="text">
+    <string>Call for technician</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

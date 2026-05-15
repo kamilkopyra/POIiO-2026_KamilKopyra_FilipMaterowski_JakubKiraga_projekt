@@ -16,10 +16,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void onAddClicked();      // slot dla przycisku "Dodaj"
-    void onSubtractClicked(); // slot dla przycisku "Odejmij"
 
 private:
-    Ui::MainWindow* ui;       // ← wskaźnik do wygenerowanego UI
-    Calculator calculator;    // ← instancja Twojej klasy logiki
+    Ui::MainWindow* ui;       // ← wskaźnik do wygenerowanego U
 };
