@@ -120,21 +120,12 @@
   <ItemGroup>
     <ClCompile Include="CoffeMachine.cpp" />
     <ClCompile Include="Ingredient.cpp" />
-    <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Tdrinks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoffeMachine.h" />
     <ClInclude Include="Ingredient.h" />
-    <ClInclude Include="MainWindow.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="Tdrinks.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MainWindow.resx">
-      <DependentUpon>MainWindow.h</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

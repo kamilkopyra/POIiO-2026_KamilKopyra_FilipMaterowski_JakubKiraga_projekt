@@ -3,5 +3,10 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Elementy rozwiązania/">
+    <File Path="GUI/MainWindow.ui" />
+    <File Path="MainWindow.cpp" />
+    <File Path="MainWindow.h" />
+  </Folder>
   <Project Path="CoffeMachine.vcxproj" />
 </Solution>
