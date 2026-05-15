@@ -13,35 +13,37 @@ Od tego czasu nasze życie nie wyglądało już tak samo...
 
 class Tdrinks
 {
-	
-	std::string name;
-	float volume;
-	float volumeOfMilk;
-	int power;  // Power = (1,2,3,4,5) default = 3
-	
-	
+    
+    std::string name;
+    float volume;
+    float volumeOfMilk;
+    int power;  // Power = (1,2,3,4,5) default = 3
+    
+    
 public:
-	
-	static std::vector<Tdrinks> drinks;
-	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
-	std::string getName();
-	int Tdrinks::getDrinkId(std::string name);
-	int getPowerOfCoffe();
-	bool hasMilk();
-	float getVolume();
-	float getVolumeOfMilk();
-	float Tdrinks::getVolumeOfWater();
-	void show();
-	int getAmountOfCoffee();
+    
+    static std::vector<Tdrinks> drinks;
+    Tdrinks(std::string name, float volume, float volumeofMilk, int power);
+    ~Tdrinks()=default;
+    static void showAll();
+    std::string getName();
+    int getDrinkId(std::string name);
+    int getPowerOfCoffe();
+    bool hasMilk();
+    float getVolume();
+    float getVolumeOfMilk();
+    float getVolumeOfWater();
+    void show();
+    int getAmountOfCoffee();
 
-	void editVolume(float newVolume);
-	void editVolumeOfMilk(float newVolumeOfMilk);
-	void editPower(int newPower);
+    void editVolume(float newVolume);
+    void editVolumeOfMilk(float newVolumeOfMilk);
+    void editPower(int newPower);
 
-	static void addDrink(std::string name, float volume, float volumeOfMilk, int power);
-	static void removeDrink(std::string name);
+    static void addDrink(std::string name, float volume, float volumeOfMilk, int power);
+    static void removeDrink(std::string name);
 
-	static Tdrinks* getDrinkByName(std::string name);
+    static Tdrinks* getDrinkByName(std::string name);
 
 };
 

@@ -1,4 +1,11 @@
 #include "MainWindow.h"
+#include "CoffeMachine.h"
+#include "Ingredient.h"
+#include "Tdrinks.h"
+
+#include<iostream>
+#include<string>
+#include<vector>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -17,39 +24,39 @@ int main(array<String^>^ args) {
 	machine.initializeMachine();
 	machine.printStatus();
 
-	//machine.makeCoffee(Tdrinks::drinks[2]);  mo≈ºna tak ale trochƒô s≈Çabe dlatego doda≈Çem szukanie po nazwie
-    
-    
+	//machine.makeCoffee(Tdrinks::drinks[2]);  moøna tak ale trochÍ s≥abe dlatego doda≥em szukanie po nazwie
 
-    machine.makeCoffee("Espresso");
-    machine.printStatus();
-    
+
+
+	machine.makeCoffee("Espresso");
+	machine.printStatus();
+
 	machine.makeCoffee("Latte");
-    machine.printStatus();
+	machine.printStatus();
 
 
-    // przyk≈Çad obs≈Çugi wyjƒÖtku
+	// przyk≥ad obs≥ugi wyjπtku
 	machine.makeCoffee("CocaCola");
 
 
-    // Dodawanie w≈Çasnego napoju
+	// Dodawanie w≥asnego napoju
 	Tdrinks::addDrink("Flat White", 150, 50, 3);
 	machine.makeCoffee("Flat White");
-    machine.printStatus();
+	machine.printStatus();
 
-    for (int i = 0; i < 3; i++) {
-        machine.makeCoffee("Latte");
-        machine.printStatus();
-    }
+	for (int i = 0; i < 3; i++) {
+		machine.makeCoffee("Latte");
+		machine.printStatus();
+	}
 
-	// uzupe≈Çnianie sk≈Çadnik√≥w
+	// uzupe≥nianie sk≥adnikÛw
 	machine.addWater(500);
 	machine.addBeans(200);
 	machine.addMilk(300);
 	machine.printStatus();
 
 	// Obsluga wyjatku -> dodanie zbyt duzej ilosci wody
-	machine.addWater(3000); // poziom wody jest uzupe≈Çniany do maksymalnej pojemno≈õci
+	machine.addWater(3000); // poziom wody jest uzupe≥niany do maksymalnej pojemnoúci
 	machine.printStatus();
 
 
@@ -67,7 +74,7 @@ int main(array<String^>^ args) {
 
 	std::cout << "\n\n\n";
 	// Prezentacja logiki klasy Tdrinks
-	Tdrinks drink("espresso", 30, 0, 3);
+	Tdrinks drink("ekspresso", 30, 0, 3);
 
 	std::cout << "Funkcja Tdrinks::show()" << std::endl;
 	drink.show();
@@ -77,8 +84,15 @@ int main(array<String^>^ args) {
 	std::cout << "Po edycji:" << std::endl;
 	drink.show();
 
+	std::cout << "==== Wszystkie napoje ====\n" << std::endl;
+	Tdrinks::showAll();
+	std::cout << "==== UsuniÍcie napoju \"ekspresso\" ====\n" << std::endl;
+	Tdrinks::removeDrink("ekspresso"); // usuniÍcie napoju z listy
+	std::cout << "==== Wszystkie napoje ====\n" << std::endl;
+	Tdrinks::showAll();
 
+	
 
-    std::cin.get();
+	std::cin.get();
     return 0;
 }
