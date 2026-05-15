@@ -2,14 +2,28 @@ cmake_minimum_required(VERSION 3.20)
 project(MyApp)
 
 set(CMAKE_CXX_STANDARD 17)
-
-# Wskaż gdzie jest Qt6 — dostosuj ścieżkę do swojej instalacji
-set(CMAKE_PREFIX_PATH ""C:\Qt\6.11.1\msvc2022_64"")
-
-# Wymagane dla Qt: automoc, autouic, autorcc
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+
+# Szuka Qt6 w typowych miejscach instalacji Windows
+# Każdy musi mieć zainstalowane Qt w domyślnej lokalizacji C:/Qt/
+if(NOT DEFINED CMAKE_PREFIX_PATH)
+    # Automatycznie znajdź najnowszą wersję Qt6 w domyślnym folderze
+    file(GLOB QT_VERSIONS "C:/Qt/6.*/msvc2022_64")
+    if(QT_VERSIONS)
+        list(SORT QT_VERSIONS ORDER DESCENDING)
+        list(GET QT_VERSIONS 0 QT_PATH)
+        set(CMAKE_PREFIX_PATH ${QT_PATH})
+        message(STATUS "Znaleziono Qt6 automatycznie: ${QT_PATH}")
+    else()
+        message(FATAL_ERROR 
+            "Nie znaleziono Qt6 w C:/Qt/\n"
+            "Zainstaluj Qt6 z https://www.qt.io/download\n"
+            "lub ustaw CMAKE_PREFIX_PATH ręcznie"
+        )
+    endif()
+endif()
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
@@ -17,14 +31,11 @@ add_executable(MyApp
     main.cpp
     gui/MainWindow.h
     gui/MainWindow.cpp
-    gui/MainWindow.ui       # CMake + AUTOUIC automatycznie wygeneruje ui_MainWindow.h
-    logic/Calculator.h
-    logic/Calculator.cpp
+    gui/MainWindow.ui
 )
 
 target_link_libraries(MyApp PRIVATE Qt6::Widgets)
 
-# Ważne: szukaj plików .ui i .h w tych katalogach
 target_include_directories(MyApp PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/logic
     ${CMAKE_CURRENT_SOURCE_DIR}/gui
