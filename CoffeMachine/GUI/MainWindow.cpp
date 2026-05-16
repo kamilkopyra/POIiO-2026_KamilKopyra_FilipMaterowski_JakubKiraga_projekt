@@ -21,12 +21,4 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-// -------------------------------------------------------
-// Jak czytać dane z GUI, wywołać logikę, pokazać wynik
-// -------------------------------------------------------
 
-void MainWindow::onAddClicked() {
-}
-
-void MainWindow::onSubtractClicked() {
-}
