@@ -2,9 +2,10 @@
 #include <string>
 #include <vector>
 #include "Tdrinks.h"
-//#include <msclr/marshal_cppstd.h>
+#include <msclr/marshal_cppstd.h>
 using namespace std;
-//string connectionString = "Data Source=mojaBaza.db;Version=3;";
+using namespace System;
+using namespace System::Data::SQLite;
 // Constructor to initialize the name and volume of the drink
 Tdrinks::Tdrinks(string name, float volume, float volumeofMilk, int power)
 {
@@ -84,10 +85,34 @@ void Tdrinks::editPower(int newPower) {
 	power = newPower;
 }
 
-
-// zmieni³em ¿eby dodawanie by³o ³atwiejsze, napój jest dodawany bezpoœrednio do wektora po utworzeniu
 void Tdrinks::addDrink(std::string name, float volume, float volumeOfMilk, int power) {
 	drinks.push_back(Tdrinks(name, volume, volumeOfMilk, power));
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+
+	System::String^ sql = "INSERT INTO drinks (name, volume, volumeofMilk, power, favourite) VALUES (@name, @volume, @volumeOfMilk, @power, @favourite)";
+
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+
+		System::String^ managedName = gcnew System::String(name.c_str());
+
+		command->Parameters->AddWithValue("@name", managedName);
+		command->Parameters->AddWithValue("@volume", volume);
+		command->Parameters->AddWithValue("@volumeOfMilk", volumeOfMilk);
+		command->Parameters->AddWithValue("@power", power);
+		command->Parameters->AddWithValue("@favourite", 0); // Domyœlnie ustawiamy na 0 (nie ulubiony)
+
+		command->ExecuteNonQuery();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error adding drink: " << errorMsg << "\n";
+	}
 }
 
 void Tdrinks::removeDrink(std::string name) {

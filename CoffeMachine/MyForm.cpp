@@ -17,11 +17,8 @@ int main(array<String^>^ args) {
 
     machine.makeCoffee("Latte");
     machine.printStatus();
-    int size = Tdrinks::drinks.size();
-	for (int i=0; i < size; i++) {
-        std::cout << Tdrinks::drinks[i].getName() << "\n";
-	}
-
+ 
+    Tdrinks::addDrink("kawa_test", 250, 0, 5);
     std::cin.get();
     return 0;
 }
