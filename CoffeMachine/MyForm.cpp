@@ -18,7 +18,7 @@ int main(array<String^>^ args) {
     machine.makeCoffee("Latte");
     machine.printStatus();
  
-    Tdrinks::addDrink("kawa_test", 250, 0, 5);
+    Tdrinks::removeDrink("kawa_test");
     std::cin.get();
     return 0;
 }

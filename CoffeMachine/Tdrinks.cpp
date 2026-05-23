@@ -116,11 +116,39 @@ void Tdrinks::addDrink(std::string name, float volume, float volumeOfMilk, int p
 }
 
 void Tdrinks::removeDrink(std::string name) {
-	for (int i = 0; i < drinks.size(); i++) {
-		if (drinks[i].getName() == name) {
-			drinks.erase(drinks.begin() + i);
-			return;
+	int _id = getDrinkId(name);
+	if (_id > 26) {
+		System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+		System::String^ sql = "DELETE FROM drinks WHERE name = @name";
+
+		try
+		{
+			System::Data::SQLite::SQLiteConnection connection(connectionString);
+			connection.Open();
+
+			System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+
+			System::String^ managedName = gcnew System::String(name.c_str());
+			command->Parameters->AddWithValue("@name", managedName);
+
+			command->ExecuteNonQuery();
 		}
+		catch (System::Exception^ ex)
+		{
+			std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+			std::cout << "Error removing drink: " << errorMsg << "\n";
+		}
+
+		for (int i = 0; i < drinks.size(); i++) {
+			if (drinks[i].getName() == name) {
+				drinks.erase(drinks.begin() + i);
+				return;
+			}
+		}
+	}
+	else 
+	{
+		std::cout << "Nie mo¿na usun¹æ tego napoju, poniewa¿ jest to jeden z domyœlnych napojów (ID <= 26).\n";
 	}
 }
 int Tdrinks::getAmountOfCoffee() {
