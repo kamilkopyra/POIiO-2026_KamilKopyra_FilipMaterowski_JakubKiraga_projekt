@@ -6,30 +6,17 @@ using namespace System::Windows::Forms;
 [STAThreadAttribute]
 
 int main(array<String^>^ args) {
-    String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+    std::vector<std::string> listaWszystkichNapojow;
 
-    try
+    LoadDrinksToVector(listaWszystkichNapojow);
+
+
+    int iloscNapojow = listaWszystkichNapojow.size();
+
+    if (iloscNapojow > 0)
     {
-        SQLiteConnection connection(connectionString);
-        connection.Open();
-
-        Console::WriteLine("Polaczono z baza");
-
-        String^ sql = "SELECT * FROM drinks";
-        SQLiteCommand^ command = gcnew SQLiteCommand(sql, % connection);
-        SQLiteDataReader^ reader = command->ExecuteReader();
-
-        while (reader->Read())
-        {
-            // Pobieramy wartość i rzutujemy na String^
-            Console::WriteLine(reader["name"]->ToString());
-        }
-
-        reader->Close();
-    }
-    catch (Exception^ ex)
-    {
-        Console::WriteLine("Wystapil blad: " + ex->Message);
+        std::string pierwszy = listaWszystkichNapojow[0];
+        Console::WriteLine("Pierwszy napoj w bazie: " + gcnew String(pierwszy.c_str()));
     }
     std::cin.get();
     return 0;

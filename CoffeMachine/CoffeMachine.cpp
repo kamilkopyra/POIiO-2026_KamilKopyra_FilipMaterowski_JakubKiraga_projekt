@@ -1,5 +1,7 @@
 #include "CoffeMachine.h"
 
+#include <msclr/marshal_cppstd.h>
+
 CoffeMachine::CoffeMachine() {
 }
 void CoffeMachine::updateMachineStatus() {
@@ -27,6 +29,8 @@ void CoffeMachine::initializeMachine()
 	isClean = true;
 	cupsServed = 0;
 	cupsSinceLastCleaning = 0;
+
+	LoadDrinksToVector();
 }
 
 void CoffeMachine::cleanMachine() 
@@ -134,4 +138,39 @@ void CoffeMachine::printHistory()
 }
 
 
+void CoffeMachine::LoadDrinksToVector()
+{
+	String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	String^ sql = "SELECT * FROM drinks";
 
+	try
+	{
+		SQLiteConnection connection(connectionString);
+		connection.Open();
+
+		SQLiteCommand^ command = gcnew SQLiteCommand(sql, % connection);
+		SQLiteDataReader^ reader = command->ExecuteReader();
+
+		while (reader->Read())
+		{
+			if (reader["name"] != DBNull::Value)
+			{
+				String^ managedString = reader["name"]->ToString();
+
+				float volume = Convert::ToSingle(reader["volume"]);
+				float volumeofMilk = Convert::ToSingle(reader["volumeofMilk"]);
+				int power = Convert::ToSingle(reader["power"]);
+				std::string nativeString = msclr::interop::marshal_as<std::string>(managedString);
+				Tdrinks drink = Tdrinks(nativeString, volume, volumeofMilk, power);
+				Tdrinks::drinks.push_back(drink);
+			}
+		}
+
+		reader->Close();
+	}
+	catch (Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error loading drinks: " << errorMsg << "\n";
+	}
+}

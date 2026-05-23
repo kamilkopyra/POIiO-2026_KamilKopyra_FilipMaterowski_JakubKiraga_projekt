@@ -4,6 +4,9 @@
 #include "Tdrinks.h"
 #include <vector>
 
+using namespace System;
+using namespace System::Data::SQLite;
+
 class CoffeMachine 
 {
 public:
@@ -29,6 +32,8 @@ public:
 
 	void printStatus();
 	void printHistory();
+
+	static std::vector<Tdrinks> drinks;
 private:
 	Ingredient water;
 	Ingredient beans;
@@ -55,4 +60,5 @@ private:
 	void checkIngredientsForFeedback(Tdrinks drink);
 	std::vector<std::string> history;
 
+	void LoadDrinksToVector();
 };

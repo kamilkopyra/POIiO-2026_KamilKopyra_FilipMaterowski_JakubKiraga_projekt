@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Tdrinks.h"
+//#include <msclr/marshal_cppstd.h>
 using namespace std;
 //string connectionString = "Data Source=mojaBaza.db;Version=3;";
 // Constructor to initialize the name and volume of the drink
@@ -128,13 +129,14 @@ int Tdrinks::getAmountOfCoffee() {
 
 // List of drinks with their names and volumes
 // (nazwa, iloœæ wody, iloœæ mleka, moc)
+/*
 std::vector<Tdrinks> Tdrinks::drinks = {
 	Tdrinks("Black Coffee", 250, 0, 4),
 	Tdrinks("Latte", 200, 100, 2),
 	Tdrinks("Cappuccino", 100, 250, 3),
 	Tdrinks("Espresso", 100, 0, 5)
 };
-
+*/
 
 // funkcja do znajdywania napoju po nazwie
 Tdrinks* Tdrinks::getDrinkByName(std::string name) {
@@ -145,3 +147,41 @@ Tdrinks* Tdrinks::getDrinkByName(std::string name) {
 	}
 	return nullptr;  
 }
+/*
+void Tdrinks::LoadDrinksToVector() 
+{
+	String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	String^ sql = "SELECT * FROM drinks"; 
+
+	try
+	{
+		SQLiteConnection connection(connectionString);
+		connection.Open();
+
+		SQLiteCommand^ command = gcnew SQLiteCommand(sql, % connection);
+		SQLiteDataReader^ reader = command->ExecuteReader();
+
+		while (reader->Read())
+		{
+			if (reader["name"] != DBNull::Value)
+			{
+				String^ managedString = reader["name"]->ToString();
+
+				float volume = Convert::ToSingle(reader["volume"]);
+				float volumeofMilk = Convert::ToSingle(reader["volumeofMilk"]);
+				int power = Convert::ToSingle(reader["power"]);
+				std::string nativeString = msclr::interop::marshal_as<std::string>(managedString);
+				Tdrinks drink=Tdrinks(nativeString, volume, volumeofMilk, power);
+				Tdrinks::drinks.push_back(drink);
+			}
+		}
+
+		reader->Close();
+	}
+	catch (Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		cout << "Error loading drinks: " << errorMsg << endl;
+	}
+}
+*/
