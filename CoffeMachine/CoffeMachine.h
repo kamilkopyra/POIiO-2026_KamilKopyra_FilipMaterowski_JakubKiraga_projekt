@@ -4,8 +4,6 @@
 #include "Tdrinks.h"
 #include <vector>
 
-using namespace System;
-using namespace System::Data::SQLite;
 
 class CoffeMachine 
 {

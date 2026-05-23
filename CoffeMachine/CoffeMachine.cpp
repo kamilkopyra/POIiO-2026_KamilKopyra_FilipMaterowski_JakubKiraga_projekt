@@ -1,6 +1,9 @@
 #include "CoffeMachine.h"
-
 #include <msclr/marshal_cppstd.h>
+
+using namespace System;
+using namespace System::Data::SQLite;
+
 
 CoffeMachine::CoffeMachine() {
 }

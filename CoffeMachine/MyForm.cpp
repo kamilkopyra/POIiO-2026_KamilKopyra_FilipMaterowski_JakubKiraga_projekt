@@ -6,18 +6,22 @@ using namespace System::Windows::Forms;
 [STAThreadAttribute]
 
 int main(array<String^>^ args) {
-    std::vector<std::string> listaWszystkichNapojow;
+    CoffeMachine machine;
+    machine.initializeMachine();
+    machine.printStatus();
 
-    LoadDrinksToVector(listaWszystkichNapojow);
+    //machine.makeCoffee(Tdrinks::drinks[2]);  //mo¿na tak ale trochê s³abe dlatego doda³em szukanie po nazwie
 
+    machine.makeCoffee("Espresso");
+    machine.printStatus();
 
-    int iloscNapojow = listaWszystkichNapojow.size();
+    machine.makeCoffee("Latte");
+    machine.printStatus();
+    int size = Tdrinks::drinks.size();
+	for (int i=0; i < size; i++) {
+        std::cout << Tdrinks::drinks[i].getName() << "\n";
+	}
 
-    if (iloscNapojow > 0)
-    {
-        std::string pierwszy = listaWszystkichNapojow[0];
-        Console::WriteLine("Pierwszy napoj w bazie: " + gcnew String(pierwszy.c_str()));
-    }
     std::cin.get();
     return 0;
 }

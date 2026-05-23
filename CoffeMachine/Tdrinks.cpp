@@ -129,14 +129,13 @@ int Tdrinks::getAmountOfCoffee() {
 
 // List of drinks with their names and volumes
 // (nazwa, iloœæ wody, iloœæ mleka, moc)
-/*
-std::vector<Tdrinks> Tdrinks::drinks = {
+
+std::vector<Tdrinks> Tdrinks::drinks;/* = {
 	Tdrinks("Black Coffee", 250, 0, 4),
 	Tdrinks("Latte", 200, 100, 2),
 	Tdrinks("Cappuccino", 100, 250, 3),
 	Tdrinks("Espresso", 100, 0, 5)
-};
-*/
+};*/
 
 // funkcja do znajdywania napoju po nazwie
 Tdrinks* Tdrinks::getDrinkByName(std::string name) {
