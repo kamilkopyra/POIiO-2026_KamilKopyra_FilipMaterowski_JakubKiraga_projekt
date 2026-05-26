@@ -2,6 +2,8 @@
 #include "menuwindow.h"
 #include "./ui_mainwindow.h"
 
+#include <QMenu>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,5 +26,23 @@ void MainWindow::on_pushButton_2_clicked()
     }
     this->hide();           // chowamy okno startowe
     menuWindow->show();     // pokazujemy menu
+}
+
+
+void MainWindow::on_Settings_button_clicked()
+{
+    QMenu *menu = new QMenu(this);
+
+    menu->addAction("Motyw");
+    menu->addAction("Język");
+    menu->addSeparator();
+    menu->addAction("Statystyka");
+
+    connect(menu, &QMenu::triggered, this, [](QAction *action) {
+        qDebug() << "Wybrano: " << action -> text();
+    });
+
+    menu->exec(ui->Settings_button->mapToGlobal(
+        ui->Settings_button->rect().bottomLeft()));
 }
 

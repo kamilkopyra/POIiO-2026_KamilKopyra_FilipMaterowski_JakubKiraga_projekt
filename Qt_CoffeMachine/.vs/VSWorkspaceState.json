@@ -1,0 +1,14 @@
+{
+  "OutputFoldersPerTargetSystem": {
+    "Local Machine": [
+      "out\\build\\debug",
+      "out\\build\\release"
+    ]
+  },
+  "ExpandedNodes": [
+    "",
+    "\\build\\Desktop_Qt_6_11_0_MinGW_64_bit-Debug"
+  ],
+  "SelectedNode": "\\build",
+  "PreviewInSolutionExplorer": false
+}
