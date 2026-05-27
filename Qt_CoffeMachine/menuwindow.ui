@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>200</y>
+     <y>160</y>
      <width>90</width>
      <height>29</height>
     </rect>
@@ -29,83 +29,14 @@
   <widget class="QPushButton" name="next_button">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>200</y>
+     <x>280</x>
+     <y>160</y>
      <width>90</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
     <string>Następny</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="volume_water_label">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>80</y>
-     <width>91</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>ilość wody:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="volume_milk_label">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>120</y>
-     <width>81</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>ilość mleka:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="power_label">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>160</y>
-     <width>91</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>moc kawy:</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="volume_water_value">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>80</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="volume_milk_value">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>120</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="power_value">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>160</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="add_button">
@@ -134,58 +65,125 @@
     <string>-</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="volume_water_button">
+  <widget class="QCheckBox" name="checkBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>80</y>
-     <width>271</width>
-     <height>31</height>
+     <x>430</x>
+     <y>60</y>
+     <width>191</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
+    <string>ilość wody</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="volume_milk_button">
+  <widget class="QCheckBox" name="checkBox_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>430</x>
      <y>120</y>
-     <width>271</width>
-     <height>31</height>
+     <width>191</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
+    <string>ilość mleka</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="power_Coffe_button">
+  <widget class="QCheckBox" name="checkBox_3">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>160</y>
-     <width>271</width>
-     <height>31</height>
+     <x>430</x>
+     <y>170</y>
+     <width>191</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
+    <string>moc kawy</string>
    </property>
   </widget>
-  <zorder>power_Coffe_button</zorder>
-  <zorder>volume_milk_button</zorder>
-  <zorder>volume_water_button</zorder>
-  <zorder>previous_button</zorder>
-  <zorder>next_button</zorder>
-  <zorder>volume_water_label</zorder>
-  <zorder>volume_milk_label</zorder>
-  <zorder>power_label</zorder>
-  <zorder>volume_water_value</zorder>
-  <zorder>volume_milk_value</zorder>
-  <zorder>power_value</zorder>
-  <zorder>add_button</zorder>
-  <zorder>subtract_button</zorder>
+  <widget class="QPushButton" name="make_coffe_button">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>330</y>
+     <width>141</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Zrób kawe</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>150</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LayoutDirection::LeftToRight</enum>
+   </property>
+   <property name="text">
+    <string>Nazwa_Kawy</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>60</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>120</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>170</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
