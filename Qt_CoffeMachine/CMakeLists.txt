@@ -27,8 +27,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         menuwindow.h menuwindow.cpp menuwindow.ui
-        CoffeMachine.cpp Ingredient.cpp Tdrinks.cpp
-        CoffeMachine.h Ingredient.h Tdrinks.h
+        CoffeMachine.cpp Ingredient.cpp
+        CoffeMachine.h Ingredient.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Qt_CoffeMachine APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
