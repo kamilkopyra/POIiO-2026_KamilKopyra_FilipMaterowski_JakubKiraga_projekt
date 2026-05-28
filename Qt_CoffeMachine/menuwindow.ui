@@ -40,6 +40,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="add_button">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -53,6 +56,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="subtract_button">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>490</x>

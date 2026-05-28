@@ -20,14 +20,24 @@ public:
     void updateCoffeValues();
 
 private slots:
-    void on_label_linkActivated(const QString &link);
 
     void on_next_button_clicked();
 
     void on_previous_button_clicked();
 
+    void on_Water_checkbox_checkStateChanged(const Qt::CheckState &arg1);
+
+    void on_Milk_checkbox_checkStateChanged(const Qt::CheckState &arg1);
+
+    void on_Power_checkbox_checkStateChanged(const Qt::CheckState &arg1);
+
 private:
     Ui::MenuWindow *ui;
+    void clearSelection();
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
 };
 
 #endif // MENUWINDOW_H
