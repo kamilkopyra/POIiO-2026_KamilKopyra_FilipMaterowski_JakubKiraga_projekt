@@ -58,5 +58,7 @@ private:
 	void checkIngredientsForFeedback(Tdrinks drink);
 	std::vector<std::string> history;
 
-	void LoadDrinksToVector();
+	void loadDrinksToVector();
+	void insertToDatebase();
+	void loadFromDatabase();
 };

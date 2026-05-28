@@ -24,16 +24,49 @@ void CoffeMachine::updateMachineStatus() {
 
 void CoffeMachine::initializeMachine() 
 {
-	water = Ingredient("Water", maxWaterCapacity/2, maxWaterCapacity, waterMinThreshold);
-	beans = Ingredient("Beans", maxBeansCapacity/2, maxBeansCapacity, beansMinThreshold);
-	milk = Ingredient("Milk", maxMilkCapacity/2, maxMilkCapacity, milkMinThreshold);
+	{
+		System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+		System::String^ sql = "SELECT 1 FROM coffemachine LIMIT 1";
 
-	isOperational = true;
-	isClean = true;
-	cupsServed = 0;
-	cupsSinceLastCleaning = 0;
+		try
+		{
+			System::Data::SQLite::SQLiteConnection connection(connectionString);
+			connection.Open();
 
-	LoadDrinksToVector();
+			System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+			System::Object^ result = command->ExecuteScalar();
+
+			if (result == nullptr)
+			{
+				water = Ingredient("Water", maxWaterCapacity / 2, maxWaterCapacity, waterMinThreshold);
+				beans = Ingredient("Beans", maxBeansCapacity / 2, maxBeansCapacity, beansMinThreshold);
+				milk = Ingredient("Milk", maxMilkCapacity / 2, maxMilkCapacity, milkMinThreshold);
+
+				isOperational = true;
+				isClean = true;
+				cupsServed = 0;
+				cupsSinceLastCleaning = 0;
+
+
+
+				insertToDatebase();
+				
+			}
+
+			else
+			{
+				loadFromDatabase();
+			}
+		}
+		catch (System::Exception^ ex)
+		{
+			std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+			std::cout << "Error connecting to coffe machine database: " << errorMsg << "\n";
+		}
+	}
+
+
+	loadDrinksToVector();
 }
 
 void CoffeMachine::cleanMachine() 
@@ -42,6 +75,8 @@ void CoffeMachine::cleanMachine()
 	cupsSinceLastCleaning = 0;
 	std::cout << "Maszyna zostala wyczyszczona\n";
 	history.push_back("Machine cleaned");
+
+	insertToDatebase();
 }
 
 void CoffeMachine::addWater(int amount) 
@@ -49,6 +84,8 @@ void CoffeMachine::addWater(int amount)
 	water.refill(amount);
 	updateMachineStatus();
 	history.push_back("Added " + std::to_string(amount) + "ml of water");
+
+	insertToDatebase();
 }
 
 void CoffeMachine::addBeans(int amount) 
@@ -56,6 +93,8 @@ void CoffeMachine::addBeans(int amount)
 	beans.refill(amount);
 	updateMachineStatus();
 	history.push_back("Added " + std::to_string(amount) + "g of beans");
+
+	insertToDatebase();
 }
 
 void CoffeMachine::addMilk(int amount) 
@@ -63,12 +102,16 @@ void CoffeMachine::addMilk(int amount)
 	milk.refill(amount);
 	updateMachineStatus();
 	history.push_back("Added " + std::to_string(amount) + "ml of milk");
+
+	insertToDatebase();
 }
 
 void CoffeMachine::descaling() 
 {
 	isOperational = true;
 	history.push_back("Machine descaled");
+
+	insertToDatebase();
 }
 
 bool CoffeMachine::checkIngredientsFor(Tdrinks drink) 
@@ -121,6 +164,7 @@ bool CoffeMachine::makeCoffee(std::string drinkName) {
 	history.push_back("Made " + drink->getName() + " (Cup #" + std::to_string(cupsServed) + ")");  
 
 	updateMachineStatus();
+	insertToDatebase();
 
 	return true;
 }
@@ -141,7 +185,7 @@ void CoffeMachine::printHistory()
 }
 
 
-void CoffeMachine::LoadDrinksToVector()
+void CoffeMachine::loadDrinksToVector()
 {
 	String^ connectionString = "Data Source=coffemachine.db;Version=3;";
 	String^ sql = "SELECT * FROM drinks";
@@ -175,5 +219,61 @@ void CoffeMachine::LoadDrinksToVector()
 	{
 		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
 		std::cout << "Error loading drinks: " << errorMsg << "\n";
+	}
+}
+
+
+void CoffeMachine::insertToDatebase() {
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "UPDATE coffemachine SET water = @water, milk = @milk, beans = @beans, cupsServed = @cupsServed, cupsSinceLastCleaning = @cupsSinceLastCleaning, isOperational = @isOperational, isClean = @isClean";
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+		command->Parameters->AddWithValue("@water", water.getAmount());
+		command->Parameters->AddWithValue("@milk", milk.getAmount());
+		command->Parameters->AddWithValue("@beans", beans.getAmount());
+		command->Parameters->AddWithValue("@cupsServed", cupsServed);
+		command->Parameters->AddWithValue("@cupsSinceLastCleaning", cupsSinceLastCleaning);
+		command->Parameters->AddWithValue("@isOperational", isOperational);
+		command->Parameters->AddWithValue("@isClean", isClean);
+		command->ExecuteNonQuery();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error updating coffe machine database: " << errorMsg << "\n";
+	}
+}
+
+void CoffeMachine::loadFromDatabase() {
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "SELECT * FROM coffemachine LIMIT 1";
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+		System::Data::SQLite::SQLiteDataReader^ reader = command->ExecuteReader();
+		if (reader->Read())
+		{
+			float storedWater = System::Convert::ToSingle(reader["water"]);
+			float storedMilk = System::Convert::ToSingle(reader["milk"]);
+			float storedBeans = System::Convert::ToSingle(reader["beans"]);
+			water = Ingredient("Water", storedWater, maxWaterCapacity, waterMinThreshold);
+			milk = Ingredient("Milk", storedMilk, maxMilkCapacity, milkMinThreshold);
+			beans = Ingredient("Beans", storedBeans, maxBeansCapacity, beansMinThreshold);
+			cupsServed = System::Convert::ToInt32(reader["cupsServed"]);
+			cupsSinceLastCleaning = System::Convert::ToInt32(reader["cupsSinceLastCleaning"]);
+			isOperational = System::Convert::ToBoolean(reader["isOperational"]);
+			isClean = System::Convert::ToBoolean(reader["isClean"]);
+		}
+		reader->Close();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error loading coffe machine database: " << errorMsg << "\n";
 	}
 }
