@@ -49,7 +49,7 @@ void CoffeMachine::initializeMachine()
 
 
 
-				insertToDatebase();
+				insertIntoDatebase();
 				
 			}
 
@@ -76,7 +76,7 @@ void CoffeMachine::cleanMachine()
 	std::cout << "Maszyna zostala wyczyszczona\n";
 	history.push_back("Machine cleaned");
 
-	insertToDatebase();
+	updateDatebase();
 }
 
 void CoffeMachine::addWater(int amount) 
@@ -85,7 +85,7 @@ void CoffeMachine::addWater(int amount)
 	updateMachineStatus();
 	history.push_back("Added " + std::to_string(amount) + "ml of water");
 
-	insertToDatebase();
+	updateDatebase();
 }
 
 void CoffeMachine::addBeans(int amount) 
@@ -94,7 +94,7 @@ void CoffeMachine::addBeans(int amount)
 	updateMachineStatus();
 	history.push_back("Added " + std::to_string(amount) + "g of beans");
 
-	insertToDatebase();
+	updateDatebase();
 }
 
 void CoffeMachine::addMilk(int amount) 
@@ -103,7 +103,7 @@ void CoffeMachine::addMilk(int amount)
 	updateMachineStatus();
 	history.push_back("Added " + std::to_string(amount) + "ml of milk");
 
-	insertToDatebase();
+	updateDatebase();
 }
 
 void CoffeMachine::descaling() 
@@ -111,7 +111,7 @@ void CoffeMachine::descaling()
 	isOperational = true;
 	history.push_back("Machine descaled");
 
-	insertToDatebase();
+	updateDatebase();
 }
 
 bool CoffeMachine::checkIngredientsFor(Tdrinks drink) 
@@ -164,7 +164,7 @@ bool CoffeMachine::makeCoffee(std::string drinkName) {
 	history.push_back("Made " + drink->getName() + " (Cup #" + std::to_string(cupsServed) + ")");  
 
 	updateMachineStatus();
-	insertToDatebase();
+	updateDatebase();
 
 	return true;
 }
@@ -223,7 +223,7 @@ void CoffeMachine::loadDrinksToVector()
 }
 
 
-void CoffeMachine::insertToDatebase() {
+void CoffeMachine::updateDatebase() {
 	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
 	System::String^ sql = "UPDATE coffemachine SET water = @water, milk = @milk, beans = @beans, cupsServed = @cupsServed, cupsSinceLastCleaning = @cupsSinceLastCleaning, isOperational = @isOperational, isClean = @isClean";
 	try
@@ -275,5 +275,52 @@ void CoffeMachine::loadFromDatabase() {
 	{
 		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
 		std::cout << "Error loading coffe machine database: " << errorMsg << "\n";
+	}
+}
+
+void CoffeMachine::resetMachine()
+{
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "DELETE FROM coffemachine";
+
+	try
+	{ 
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+
+		command->ExecuteNonQuery();
+
+		initializeMachine();
+	}
+	catch(System::Exception^ ex)
+	{ 
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error deleting coffe machine database: " << errorMsg << "\n";
+	}
+}
+
+void CoffeMachine::insertIntoDatebase() {
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "INSERT INTO coffemachine (water, milk, beans, cupsServed, cupsSinceLastCleaning, isOperational, isClean) VALUES (@water, @milk, @beans, @cupsServed, @cupsSinceLastCleaning, @isOperational, @isClean)";
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+		command->Parameters->AddWithValue("@water", water.getAmount());
+		command->Parameters->AddWithValue("@milk", milk.getAmount());
+		command->Parameters->AddWithValue("@beans", beans.getAmount());
+		command->Parameters->AddWithValue("@cupsServed", cupsServed);
+		command->Parameters->AddWithValue("@cupsSinceLastCleaning", cupsSinceLastCleaning);
+		command->Parameters->AddWithValue("@isOperational", isOperational);
+		command->Parameters->AddWithValue("@isClean", isClean);
+		command->ExecuteNonQuery();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error inserting into coffe machine database: " << errorMsg << "\n";
 	}
 }

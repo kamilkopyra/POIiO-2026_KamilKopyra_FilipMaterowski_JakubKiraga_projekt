@@ -32,6 +32,8 @@ public:
 	void printHistory();
 
 	static std::vector<Tdrinks> drinks;
+
+	void resetMachine();
 private:
 	Ingredient water;
 	Ingredient beans;
@@ -59,6 +61,7 @@ private:
 	std::vector<std::string> history;
 
 	void loadDrinksToVector();
-	void insertToDatebase();
+	void insertIntoDatebase();
+	void updateDatebase();
 	void loadFromDatabase();
 };
