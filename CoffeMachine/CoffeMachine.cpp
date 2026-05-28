@@ -67,6 +67,7 @@ void CoffeMachine::initializeMachine()
 
 
 	loadDrinksToVector();
+	loadHistoryFromDatabase();
 }
 
 void CoffeMachine::cleanMachine() 
@@ -74,44 +75,55 @@ void CoffeMachine::cleanMachine()
 	isClean = true;
 	cupsSinceLastCleaning = 0;
 	std::cout << "Maszyna zostala wyczyszczona\n";
-	history.push_back("Machine cleaned");
+	std::string historyEntry = ("Machine cleaned");
+	history.push_back(historyEntry);
 
 	updateDatebase();
+	updateHistoryDatebase(historyEntry);
 }
 
 void CoffeMachine::addWater(int amount) 
 {
 	water.refill(amount);
 	updateMachineStatus();
-	history.push_back("Added " + std::to_string(amount) + "ml of water");
+	std::string historyEntry = "Added " + std::to_string(amount) + "ml of water";
+	history.push_back(historyEntry);
 
 	updateDatebase();
+	updateHistoryDatebase(historyEntry);
 }
 
 void CoffeMachine::addBeans(int amount) 
 {
 	beans.refill(amount);
 	updateMachineStatus();
-	history.push_back("Added " + std::to_string(amount) + "g of beans");
+	std::string historyEntry = "Added " + std::to_string(amount) + "g of beans";
+	history.push_back(historyEntry);
 
 	updateDatebase();
+	updateHistoryDatebase(historyEntry);
 }
 
 void CoffeMachine::addMilk(int amount) 
 {
 	milk.refill(amount);
 	updateMachineStatus();
-	history.push_back("Added " + std::to_string(amount) + "ml of milk");
+	std::string historyEntry = "Added " + std::to_string(amount) + "ml of milk";
+	history.push_back(historyEntry);
 
 	updateDatebase();
+	updateHistoryDatebase(historyEntry);
 }
 
 void CoffeMachine::descaling() 
 {
 	isOperational = true;
-	history.push_back("Machine descaled");
+	std::string historyEntry = "Machine descaled";
+	history.push_back(historyEntry);
 
+	updateMachineStatus();
 	updateDatebase();
+	updateHistoryDatebase(historyEntry);
 }
 
 bool CoffeMachine::checkIngredientsFor(Tdrinks drink) 
@@ -161,10 +173,12 @@ bool CoffeMachine::makeCoffee(std::string drinkName) {
 	cupsServed++;
 	cupsSinceLastCleaning++;
 
-	history.push_back("Made " + drink->getName() + " (Cup #" + std::to_string(cupsServed) + ")");  
+	std::string historyEntry="Made " + drink->getName() + " (Cup #" + std::to_string(cupsServed) + ")";  
+	history.push_back(historyEntry);
 
 	updateMachineStatus();
 	updateDatebase();
+	updateHistoryDatebase(historyEntry);
 
 	return true;
 }
@@ -293,6 +307,7 @@ void CoffeMachine::resetMachine()
 		command->ExecuteNonQuery();
 
 		initializeMachine();
+		deleteHistory();
 	}
 	catch(System::Exception^ ex)
 	{ 
@@ -322,5 +337,68 @@ void CoffeMachine::insertIntoDatebase() {
 	{
 		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
 		std::cout << "Error inserting into coffe machine database: " << errorMsg << "\n";
+	}
+}
+
+void CoffeMachine::updateHistoryDatebase(std::string HistoryEntry) {
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "INSERT INTO history (entry) VALUES (@entry)";
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+		command->Parameters->AddWithValue("@entry", msclr::interop::marshal_as<System::String^>(HistoryEntry));
+		command->ExecuteNonQuery();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error updating history database: " << errorMsg << "\n";
+	}
+}
+
+void CoffeMachine::loadHistoryFromDatabase() {
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "SELECT * FROM history";
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+		System::Data::SQLite::SQLiteDataReader^ reader = command->ExecuteReader();
+		while (reader->Read())
+		{
+			if (reader["entry"] != DBNull::Value)
+			{
+				String^ managedString = reader["entry"]->ToString();
+				std::string nativeString = msclr::interop::marshal_as<std::string>(managedString);
+				history.push_back(nativeString);
+			}
+		}
+		reader->Close();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error loading history from database: " << errorMsg << "\n";
+	}
+}
+
+void CoffeMachine::deleteHistory() {
+	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
+	System::String^ sql = "DELETE FROM history";
+	try
+	{
+		System::Data::SQLite::SQLiteConnection connection(connectionString);
+		connection.Open();
+		System::Data::SQLite::SQLiteCommand^ command = gcnew System::Data::SQLite::SQLiteCommand(sql, % connection);
+		command->ExecuteNonQuery();
+		history.clear();
+	}
+	catch (System::Exception^ ex)
+	{
+		std::string errorMsg = msclr::interop::marshal_as<std::string>(ex->Message);
+		std::cout << "Error deleting history from database: " << errorMsg << "\n";
 	}
 }
