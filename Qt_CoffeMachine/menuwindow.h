@@ -19,6 +19,8 @@ public:
 
     void updateCoffeValues();
 
+    void updateEditButtonsVisibility();
+
 private slots:
 
     void on_next_button_clicked();
@@ -30,6 +32,10 @@ private slots:
     void on_Milk_checkbox_checkStateChanged(const Qt::CheckState &arg1);
 
     void on_Power_checkbox_checkStateChanged(const Qt::CheckState &arg1);
+
+    void on_add_button_pressed();
+
+    void on_subtract_button_pressed();
 
 private:
     Ui::MenuWindow *ui;

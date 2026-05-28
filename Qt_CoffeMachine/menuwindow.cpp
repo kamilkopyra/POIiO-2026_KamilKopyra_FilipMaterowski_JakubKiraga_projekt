@@ -1,3 +1,5 @@
+#include <QTimer>
+
 #include "menuwindow.h"
 #include "ui_menuwindow.h"
 #include "Tdrinks.h"
@@ -84,6 +86,22 @@ void MenuWindow::clearSelection()
     ui->subtract_button->hide();
 }
 
+void MenuWindow::updateEditButtonsVisibility()
+{
+    bool anyChecked =
+        ui->Water_checkbox->isChecked() ||
+        ui->Milk_checkbox->isChecked() ||
+        ui->Power_checkbox->isChecked();
+
+    ui->add_button->setVisible(anyChecked);
+    ui->subtract_button->setVisible(anyChecked);
+
+    if (!anyChecked) {
+        checkBoxId = 0;
+    }
+    qDebug() << "CheckboxID: "<< checkBoxId;
+}
+
 
 
 void MenuWindow::on_Water_checkbox_checkStateChanged(const Qt::CheckState &arg1)
@@ -95,6 +113,7 @@ void MenuWindow::on_Water_checkbox_checkStateChanged(const Qt::CheckState &arg1)
         ui->Milk_checkbox->setChecked(false);
         checkBoxId=1;
     }
+    updateEditButtonsVisibility();
 }
 
 
@@ -107,7 +126,9 @@ void MenuWindow::on_Milk_checkbox_checkStateChanged(const Qt::CheckState &arg1)
         ui->Water_checkbox->setChecked(false);
         checkBoxId=2;
     }
+    updateEditButtonsVisibility();
 }
+
 
 
 void MenuWindow::on_Power_checkbox_checkStateChanged(const Qt::CheckState &arg1)
@@ -118,6 +139,52 @@ void MenuWindow::on_Power_checkbox_checkStateChanged(const Qt::CheckState &arg1)
         ui->Milk_checkbox->setChecked(false);
         ui->Water_checkbox->setChecked(false);
         checkBoxId=3;
+    }
+    updateEditButtonsVisibility();
+}
+
+
+void MenuWindow::on_add_button_pressed()
+{
+    QTimer timer;
+    timer.start(500);
+    Tdrinks* drink = drinks[currentCoffeId];
+    updateCoffeValues();
+    switch(checkBoxId){
+    case 1:
+        drink->editVolume(drink->getVolume()+5);
+        break;
+    case 2:
+        drink->editVolumeOfMilk(drink->getVolumeOfMilk()+5);
+        break;
+    case 3:
+        drink->editPower(drink->getPowerOfCoffe()+1);
+        break;
+    default:
+        qDebug() << "Nie zaznaczono checkboxa";
+    }
+
+}
+
+
+void MenuWindow::on_subtract_button_pressed()
+{
+    QTimer timer;
+    timer.start(500);
+    Tdrinks* drink = drinks[currentCoffeId];
+    updateCoffeValues();
+    switch(checkBoxId){
+    case 1:
+        drink->editVolume(drink->getVolume()-5);
+        break;
+    case 2:
+        drink->editVolumeOfMilk(drink->getVolumeOfMilk()-5);
+        break;
+    case 3:
+        drink->editPower(drink->getPowerOfCoffe()-1);
+        break;
+    default:
+        qDebug() << "Nie zaznaczono checkboxa";
     }
 }
 
