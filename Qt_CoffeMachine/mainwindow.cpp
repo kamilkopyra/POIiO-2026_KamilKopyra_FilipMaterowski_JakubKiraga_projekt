@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QPixmap pixmap("://Coffe.png");
+    ui->Cup_image->setPixmap(pixmap);
+    ui->Cup_image->setScaledContents(true);
 }
 
 MainWindow::~MainWindow()

@@ -72,6 +72,19 @@
      <string>Your Source Of Power</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Cup_image">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>160</y>
+      <width>211</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

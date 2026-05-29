@@ -3,6 +3,7 @@
 #include "menuwindow.h"
 #include "ui_menuwindow.h"
 #include "Tdrinks.h"
+#include "makingwindow.h"
 
 int currentCoffeId=0;
 int checkBoxId=0;
@@ -176,6 +177,7 @@ void MenuWindow::on_subtract_button_pressed()
     switch(checkBoxId){
     case 1:
         drink->editVolume(drink->getVolume()-5);
+        qDebug() << drinks[currentCoffeId]->getVolume();
         break;
     case 2:
         drink->editVolumeOfMilk(drink->getVolumeOfMilk()-5);
@@ -188,3 +190,15 @@ void MenuWindow::on_subtract_button_pressed()
     }
 }
 
+
+void MenuWindow::on_make_coffe_button_clicked()
+{
+    if (!makingWindow) {
+       makingWindow = new makingwindow(nullptr);
+
+        connect(makingWindow, &makingwindow::destroyed,
+                this,       &MenuWindow::show);
+    }
+    this->hide();
+    makingWindow->show();
+}

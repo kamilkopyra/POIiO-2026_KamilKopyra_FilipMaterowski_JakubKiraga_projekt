@@ -1,6 +1,7 @@
 #ifndef MENUWINDOW_H
 #define MENUWINDOW_H
 
+#include "makingwindow.h"
 #include <QWidget>
 
 namespace Ui {
@@ -37,8 +38,11 @@ private slots:
 
     void on_subtract_button_pressed();
 
+    void on_make_coffe_button_clicked();
+
 private:
     Ui::MenuWindow *ui;
+    makingwindow *makingWindow = nullptr;
     void clearSelection();
 
 protected:
