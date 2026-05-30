@@ -2,6 +2,9 @@
 #define MAKINGWINDOW_H
 
 #include <QWidget>
+#include <QTimer>
+
+class MainWindow;
 
 namespace Ui {
 class makingwindow;
@@ -17,6 +20,8 @@ public:
 
 private:
     Ui::makingwindow *ui;
+    MainWindow *mainWindow = nullptr;
+
 };
 
 #endif // MAKINGWINDOW_H
