@@ -22,15 +22,17 @@ class Tdrinks
 	
 public:
 	
-	static std::vector<Tdrinks> drinks;
 	Tdrinks(std::string name, float volume, float volumeofMilk, int power);
-	std::string getName();
-	static int Tdrinks::getDrinkId(std::string name);
+	Tdrinks(const Tdrinks& other);
+	~Tdrinks() = default;
+	static void showAll();
+	std::string getName() const;
+	int Tdrinks::getDrinkId(std::string name) const;
 	int getPowerOfCoffe();
 	bool hasMilk();
-	float getVolume();
-	float getVolumeOfMilk();
-	float Tdrinks::getVolumeOfWater();
+	float getVolume() const;
+	float getVolumeOfMilk() const;
+	float getVolumeOfWater() const;
 	void show();
 	int getAmountOfCoffee();
 
@@ -41,9 +43,17 @@ public:
 	static void addDrink(std::string name, float volume, float volumeOfMilk, int power);
 	static void removeDrink(std::string name);
 
+	static void copyDrink(std::string name);
+
 	static Tdrinks* getDrinkByName(std::string name);
 
 	//void LoadDrinksToVector();
 };
+
+// Declaration of the global drinks vector used across the module.
+// It is defined in Tdrinks.cpp
+extern std::vector<Tdrinks*> drinks;
+
+
 
 
