@@ -193,6 +193,7 @@ void MenuWindow::on_subtract_button_pressed()
 
 void MenuWindow::on_make_coffe_button_clicked()
 {
+    Tdrinks* drink = drinks[currentCoffeId];
     if (!makingWindow) {
        makingWindow = new makingwindow(nullptr);
 

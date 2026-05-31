@@ -29,6 +29,9 @@ public:
 
 	void printStatus();
 	void printHistory();
+
+    void resetMachine();
+    void deleteHistory();
 private:
 	Ingredient water;
 	Ingredient beans;
@@ -55,4 +58,10 @@ private:
 	void checkIngredientsForFeedback(Tdrinks drink);
 	std::vector<std::string> history;
 
+    void loadDrinksToVector();
+    void insertIntoDatebase();
+    void updateDatebase();
+    void loadFromDatabase();
+    void updateHistoryDatebase(std::string HistoryEntry);
+    void loadHistoryFromDatabase();
 };

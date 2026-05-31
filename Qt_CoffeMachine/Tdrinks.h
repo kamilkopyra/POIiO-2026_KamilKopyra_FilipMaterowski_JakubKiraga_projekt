@@ -29,7 +29,7 @@ public:
     ~Tdrinks()=default;
     static void showAll();
     std::string getName() const;
-    int getDrinkId(std::string name);
+    static int getDrinkId(std::string name);
     int getPowerOfCoffe() const	;
     bool hasMilk();
     float getVolume() const;

@@ -1,12 +1,32 @@
 #include "mainwindow.h"
-
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QCoreApplication>
+#include <QDebug>
+
+bool initDatabase() {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
+    QString dbPath = QString(PROJECT_PATH) + "/coffemachine.db";
+    db.setDatabaseName(dbPath);
+
+    if (!db.open()) {
+        qDebug() << "Blad otwarcia bazy danych:" << db.lastError().text();
+        return false;
+    }
+
+    qDebug() << "Udalo sie polaczyc z baza danych!";
+    return true;
+}
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    initDatabase();
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

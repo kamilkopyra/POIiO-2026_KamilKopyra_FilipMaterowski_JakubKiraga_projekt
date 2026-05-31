@@ -1,6 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
+#include <QDebug>
 #include "Tdrinks.h"
 using namespace std;
 
@@ -103,14 +108,48 @@ void Tdrinks::editPower(int newPower) {
 void Tdrinks::addDrink(std::string name, float volume, float volumeOfMilk, int power) {
     Tdrinks(name, volume, volumeOfMilk, power);
     drinks.push_back(new Tdrinks(name, volume, volumeOfMilk, power));
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO drinks (name, volume, volumeofMilk, power, favourite) "
+                  "VALUES (:name, :volume, :volumeOfMilk, :power, :favourite)");
+
+    query.bindValue(":name", QString::fromStdString(name));
+    query.bindValue(":volume", volume);
+    query.bindValue(":volumeOfMilk", volumeOfMilk);
+    query.bindValue(":power", power);
+    query.bindValue(":favourite", 0); // Domyślnie 0 (fałsz)
+
+    if (query.exec()) {
+        qDebug() << "Successfully added drink to database:" << QString::fromStdString(name);
+    } else {
+        qDebug() << "Error adding drink to database:" << query.lastError().text();
+    }
 }
 
 void Tdrinks::removeDrink(std::string name) {
-    for (int i = 0; i < drinks.size(); i++) {
-        if (drinks[i]->getName() == name) {
-            delete drinks[i];
-            return;
+    int _id = getDrinkId(name);
+
+    if (_id > 26) {
+        QSqlQuery query;
+        query.prepare("DELETE FROM drinks WHERE name = :name");
+        query.bindValue(":name", QString::fromStdString(name));
+
+        if (query.exec()) {
+            qDebug() << "Successfully removed drink from database:" << QString::fromStdString(name);
+        } else {
+            qDebug() << "Error removing drink from database:" << query.lastError().text();
         }
+
+        for (size_t i = 0; i < drinks.size(); i++) {
+            if (drinks[i]->getName() == name) {
+                delete drinks[i];
+                drinks.erase(drinks.begin() + i);
+                return;
+            }
+        }
+    }
+    else {
+        qDebug() << "Nie można usunąć tego napoju, ponieważ jest to jeden z domyślnych napojów (ID <= 26).";
     }
 }
 int Tdrinks::getAmountOfCoffee() {
@@ -156,12 +195,7 @@ void Tdrinks::copyDrink(std::string name) {
 }
 // List of drinks with their names and volumes
 // (nazwa, iloœæ wody, iloœæ mleka, moc)
-std::vector<Tdrinks*> drinks = {
-    new Tdrinks("Black Coffee", 250, 0, 4),
-    new Tdrinks("Latte", 200, 100, 2),
-    new Tdrinks("Cappuccino", 100, 250, 3),
-    new Tdrinks("Espresso", 100, 0, 5)
-};
+std::vector<Tdrinks*> drinks;
 
 
 // funkcja do znajdywania napoju po nazwie
