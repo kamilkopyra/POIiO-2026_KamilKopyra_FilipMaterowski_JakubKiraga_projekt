@@ -44,14 +44,13 @@ int Tdrinks::getDrinkId(string name)
 
 		if ((_id + 1 == count) && (run == true))
 		{
-			cout << "Nie znaleziono plynu o podanej nazwie: \"" << name << "\"!\n";
+			cout << "Nie znaleziono napoju o podanej nazwie: \"" << name << "\"!\n";
 			run = false;
 			_id = -1;
 		}
 	}
 	return _id;
 }
-
 
 // Returns the name of the drink
 std::string Tdrinks::getName() const 
@@ -131,7 +130,7 @@ void Tdrinks::addDrink(std::string name, float volume, float volumeOfMilk, int p
 }
 
 void Tdrinks::removeDrink(std::string name) {
-	int _id = getDrinkId(name);
+	int _id = getDrinkId (name);
 	if (_id > 26) {
 		System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";
 		System::String^ sql = "DELETE FROM drinks WHERE name = @name";
@@ -157,6 +156,7 @@ void Tdrinks::removeDrink(std::string name) {
 		for (int i = 0; i < drinks.size(); i++) {
 			if (drinks[i]->getName() == name) {
 				delete drinks[i];
+				drinks.erase(drinks.begin() + i);
 				return;
 			}
 		}
@@ -210,18 +210,16 @@ void Tdrinks::copyDrink(std::string name) {
 // List of drinks with their names and volumes
 // (nazwa, iloœæ wody, iloœæ mleka, moc)
 
-std::vector<Tdrinks> Tdrinks::drinks;/* = {
-	Tdrinks("Black Coffee", 250, 0, 4),
-	Tdrinks("Latte", 200, 100, 2),
-	Tdrinks("Cappuccino", 100, 250, 3),
-	Tdrinks("Espresso", 100, 0, 5)
-};*/
+vector<Tdrinks*> drinks;
 
 // funkcja do znajdywania napoju po nazwie
 Tdrinks* Tdrinks::getDrinkByName(std::string name) {
-	for (auto& drink : drinks) {
-		if (drink->getName() == name) {
-			return drink;
+	int count = drinks.size();
+	for (int i = 0; i < count; i++) 
+	{
+		if (drinks[i]->getName() == name)
+		{
+			return drinks[i];
 		}
 	}
 	return nullptr;  

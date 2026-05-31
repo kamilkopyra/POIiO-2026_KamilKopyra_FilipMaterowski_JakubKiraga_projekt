@@ -31,7 +31,7 @@ public:
 	void printStatus();
 	void printHistory();
 
-	static std::vector<Tdrinks> drinks;
+	//static std::vector<Tdrinks> drinks;
 
 	void resetMachine();
 	void deleteHistory();

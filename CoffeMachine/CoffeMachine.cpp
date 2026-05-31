@@ -222,8 +222,8 @@ void CoffeMachine::loadDrinksToVector()
 				float volumeofMilk = Convert::ToSingle(reader["volumeofMilk"]);
 				int power = Convert::ToSingle(reader["power"]);
 				std::string nativeString = msclr::interop::marshal_as<std::string>(managedString);
-				Tdrinks drink = Tdrinks(nativeString, volume, volumeofMilk, power);
-				Tdrinks::drinks.push_back(drink);
+				Tdrinks* drink = new Tdrinks(nativeString, volume, volumeofMilk, power);
+				drinks.push_back(drink);
 			}
 		}
 
@@ -235,7 +235,6 @@ void CoffeMachine::loadDrinksToVector()
 		std::cout << "Error loading drinks: " << errorMsg << "\n";
 	}
 }
-
 
 void CoffeMachine::updateDatebase() {
 	System::String^ connectionString = "Data Source=coffemachine.db;Version=3;";

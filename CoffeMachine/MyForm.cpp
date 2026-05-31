@@ -8,7 +8,8 @@ using namespace System::Windows::Forms;
 int main(array<String^>^ args) {
     CoffeMachine machine;
     machine.initializeMachine();
-    machine.resetMachine();
+    machine.deleteHistory();
+	//machine.cleanMachine();
     machine.printStatus();
     machine.printHistory();
     std::cin.get();
