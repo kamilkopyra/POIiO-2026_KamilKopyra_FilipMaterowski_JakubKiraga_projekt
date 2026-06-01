@@ -155,30 +155,19 @@ void Tdrinks::removeDrink(std::string name) {
 int Tdrinks::getAmountOfCoffee() {
     float AmountPerVolume;
     switch (power) {
-    case 1:
-        AmountPerVolume = 8.0/250.0;
-        break;
-    case 2:
-        AmountPerVolume = 10.0/250.0;
-        break;
-    case 3:
-        AmountPerVolume = 14.0/250.0;
-        break;
-    case 4:
-        AmountPerVolume = 16.0/250.0;
-        break;
-    case 5:
-        AmountPerVolume = 18.0/250.0;
-        break;
+    case 1: return 7;
+    case 2: return 9;
+    case 3: return 12;
+    case 4: return 15;
+    case 5: return 18;
     default:
         std::cout << "Invalid power level. Setting to default (3).\n";
         power = 3;
-        AmountPerVolume = 14.0 / 250.0;
-        break;
+        return 12;
 
 
     }
-    return int(AmountPerVolume * volume);
+    return int(AmountPerVolume * (volume + volumeOfMilk));
 }
 
 void Tdrinks::copyDrink(std::string name) {

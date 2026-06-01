@@ -217,6 +217,8 @@ void CoffeMachine::loadDrinksToVector()
     }
 }
 
+CoffeMachine machine;
+
 void CoffeMachine::updateDatebase() {
     QSqlQuery query;
 

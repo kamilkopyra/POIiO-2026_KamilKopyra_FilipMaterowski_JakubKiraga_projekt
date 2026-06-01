@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "menuwindow.h"
-#include "CoffeMachine.h"
 #include "./ui_mainwindow.h"
 
 #include <QMenu>
@@ -25,8 +24,6 @@ void MainWindow::on_pushButton_2_clicked()
 {
 
     if (!menuWindow) {
-        CoffeMachine machine;
-        machine.initializeMachine();
 
         menuWindow = new MenuWindow(nullptr);        // tworzymy tylko raz
 

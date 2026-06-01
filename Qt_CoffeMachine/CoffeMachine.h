@@ -65,3 +65,4 @@ private:
     void updateHistoryDatebase(std::string HistoryEntry);
     void loadHistoryFromDatabase();
 };
+extern CoffeMachine machine;
