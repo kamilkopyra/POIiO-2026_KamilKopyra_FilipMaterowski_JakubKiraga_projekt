@@ -16,7 +16,7 @@ public:
 	int diagnoseMachine();
 	int repairMachine();
 	
-	bool makeCoffee(std::string drinkName);
+    bool makeCoffee(Tdrinks drink);
 	void initializeMachine();
 	void addWater(int amount);
 	void addBeans(int amount);

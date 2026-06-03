@@ -24,6 +24,7 @@ class Tdrinks
 
 public:
 
+    Tdrinks();
     Tdrinks(std::string name, float volume, float volumeofMilk, int power);
     Tdrinks(const Tdrinks& other);
     ~Tdrinks()=default;

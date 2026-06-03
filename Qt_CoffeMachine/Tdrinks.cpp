@@ -9,6 +9,13 @@
 #include "Tdrinks.h"
 using namespace std;
 
+Tdrinks::Tdrinks()
+{
+    this->name = "";
+    this->volume = 0;
+    this->volumeOfMilk = 0;
+    this->power = 0;
+}
 // Constructor to initialize the name and volume of the drink
 Tdrinks::Tdrinks(string name, float volume, float volumeofMilk, int power)
 {
@@ -20,7 +27,7 @@ Tdrinks::Tdrinks(string name, float volume, float volumeofMilk, int power)
 
 Tdrinks::Tdrinks(const Tdrinks& other) {
 
-    this->name = other.getName() + "_copy" + std::to_string(rand() % 1000);
+    this->name = other.getName();// + "_copy" + std::to_string(rand() % 1000);
     this->volume = other.getVolumeOfWater();
     this->volumeOfMilk = other.getVolumeOfMilk();
     this->power = other.getPowerOfCoffe();

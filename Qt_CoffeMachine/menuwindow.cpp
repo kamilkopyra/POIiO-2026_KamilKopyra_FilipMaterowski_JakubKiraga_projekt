@@ -7,21 +7,24 @@
 
 int currentCoffeId=0;
 int checkBoxId=0;
+Tdrinks drink_copy = Tdrinks();
 
 MenuWindow::MenuWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MenuWindow)
 {
     machine.initializeMachine();
+    drink_copy = Tdrinks(*drinks[currentCoffeId]);
     ui->setupUi(this);
     this->installEventFilter(this);
-    ui->previous_button->setEnabled(false);
-    ui->next_button->setEnabled(true);
+    ui->previous_button->hide();
+    ui->next_button->show();
     MenuWindow::updateCoffeName();
     MenuWindow::updateCoffeValues();
 
     ui->add_button->hide();
     ui->subtract_button->hide();
+
 }
 
 MenuWindow::~MenuWindow()
@@ -41,6 +44,7 @@ bool MenuWindow::eventFilter(QObject *obj, QEvent *event)
 
 void MenuWindow::updateCoffeName(){
     int menuSize=drinks.size();
+
     Tdrinks* drink = drinks[currentCoffeId];
 
     if (currentCoffeId>menuSize-1){
@@ -55,26 +59,26 @@ void MenuWindow::updateCoffeName(){
 
 void MenuWindow::updateCoffeValues(){
     //MenuWindow::updateCoffeName();
-    Tdrinks* drink = drinks[currentCoffeId];
 
-    ui->Coffe_water->setText(QString::number(drink->getVolumeOfWater(),'f',1) + "ml");
-    ui->Coffe_milk->setText(QString::number(drink->getVolumeOfMilk(),'f',1) + "ml");
-    ui->Coffe_power->setText(QString::number(drink->getPowerOfCoffe()));
+    ui->Coffe_water->setText(QString::number(drink_copy.getVolumeOfWater(),'f',1) + "ml");
+    ui->Coffe_milk->setText(QString::number(drink_copy.getVolumeOfMilk(),'f',1) + "ml");
+    ui->Coffe_power->setText(QString::number(drink_copy.getPowerOfCoffe()));
 
 }
 
 void MenuWindow::on_next_button_clicked()
 {
     if (currentCoffeId == 0) {
-        ui->previous_button->setEnabled(true);
+        ui->previous_button->show();
     }
 
     currentCoffeId++;
+    drink_copy = Tdrinks(*drinks[currentCoffeId]);
     updateCoffeName();
     updateCoffeValues();
 
     if (currentCoffeId >= drinks.size() - 1) {
-        ui->next_button->setEnabled(false);
+        ui->next_button->hide();
     }
 
     ui->add_button->hide();
@@ -88,14 +92,16 @@ void MenuWindow::on_next_button_clicked()
 void MenuWindow::on_previous_button_clicked()
 {
     if (currentCoffeId == drinks.size() - 1) {
-        ui->next_button->setEnabled(true);
+        ui->next_button->show();
     }
 
     currentCoffeId--;
+    drink_copy = Tdrinks(*drinks[currentCoffeId]);
     updateCoffeName();
     updateCoffeValues();
+
     if(currentCoffeId==0){
-       ui->previous_button->setEnabled(false);
+        ui->previous_button->hide();
     }
 
     ui->add_button->hide();
@@ -124,10 +130,37 @@ void MenuWindow::updateEditButtonsVisibility()
         ui->Water_checkbox->isChecked() ||
         ui->Milk_checkbox->isChecked() ||
         ui->Power_checkbox->isChecked();
+    if(anyChecked){
+        switch(checkBoxId){
+        case 1:
+        if(drink_copy.getVolumeOfWater() > 20) ui->subtract_button->show();
+        else ui->subtract_button->hide();
 
-    ui->add_button->setVisible(anyChecked);
-    ui->subtract_button->setVisible(anyChecked);
+        if(drink_copy.getVolumeOfWater() < 500) ui->add_button->show();
+        else ui->add_button->hide();
+        break;
+        case 2:
+        if(drink_copy.getVolumeOfMilk() > 0) ui->subtract_button->show();
+        else ui->subtract_button->hide();
 
+        if(drink_copy.getVolumeOfMilk() < 500) ui->add_button->show();
+        else ui->add_button->hide();
+        break;
+        case 3:
+        if(drink_copy.getPowerOfCoffe() > 1) ui->subtract_button->show();
+        else ui->subtract_button->hide();
+
+        if(drink_copy.getPowerOfCoffe() < 5) ui->add_button->show();
+        else ui->add_button->hide();
+        break;
+        default:
+            qDebug() << "Nie zaznaczono CheckboxID";
+        }
+    }
+    else{
+        ui->add_button->hide();
+        ui->subtract_button->hide();
+    }
     if (!anyChecked) {
         checkBoxId = 0;
     }
@@ -166,15 +199,8 @@ void MenuWindow::on_Milk_checkbox_checkStateChanged(const Qt::CheckState &arg1)
 void MenuWindow::on_Power_checkbox_checkStateChanged(const Qt::CheckState &arg1)
 {
     if(arg1==Qt::Checked){
-        Tdrinks* drink = drinks[currentCoffeId];
         ui->add_button->show();
         ui->subtract_button->show();
-        if(drink->getPowerOfCoffe() >= 5){
-            ui->add_button->hide();
-        }
-        else if(drink->getPowerOfCoffe() <= 0){
-            ui->subtract_button->hide();
-        }
         ui->Milk_checkbox->setChecked(false);
         ui->Water_checkbox->setChecked(false);
         checkBoxId=3;
@@ -187,30 +213,20 @@ void MenuWindow::on_add_button_pressed()
 {
     QTimer timer;
     timer.start(500);
-    Tdrinks* drink = drinks[currentCoffeId];
     switch(checkBoxId){
     case 1:
-        drink->editVolume(drink->getVolumeOfWater()+5);
+        drink_copy.editVolume(drink_copy.getVolumeOfWater()+5);
         break;
     case 2:
-        drink->editVolumeOfMilk(drink->getVolumeOfMilk()+5);
+        drink_copy.editVolumeOfMilk(drink_copy.getVolumeOfMilk()+5);
         break;
     case 3:
-        if(drink->getPowerOfCoffe()==0){
-            ui->subtract_button->show();
-        }
-        drink->editPower(drink->getPowerOfCoffe()+1);
-        if(drink->getPowerOfCoffe()>=5){
-            ui->next_button->setEnabled(true);
-            if(drink->getPowerOfCoffe() >= 5){
-                ui->add_button->hide();
-            }
-        }
+        drink_copy.editPower(drink_copy.getPowerOfCoffe()+1);
         break;
     default:
         qDebug() << "Nie zaznaczono checkboxa";
     }
-
+    updateEditButtonsVisibility();
     updateCoffeValues();
 }
 
@@ -219,36 +235,27 @@ void MenuWindow::on_subtract_button_pressed()
 {
     QTimer timer;
     timer.start(500);
-    Tdrinks* drink = drinks[currentCoffeId];
     switch(checkBoxId){
     case 1:
-        drink->editVolume(drink->getVolumeOfWater()-5);
-        qDebug() << drinks[currentCoffeId]->getVolumeOfWater();
+        drink_copy.editVolume(drink_copy.getVolumeOfWater()-5);
         break;
     case 2:
-        drink->editVolumeOfMilk(drink->getVolumeOfMilk()-5);
+        drink_copy.editVolumeOfMilk(drink_copy.getVolumeOfMilk()-5);
         break;
     case 3:
-        if(drink->getPowerOfCoffe() == 5){
-            ui->add_button->show();
-        }
-        drink->editPower(drink->getPowerOfCoffe()-1);
-        if(drink->getPowerOfCoffe() <= 0){
-            ui->subtract_button->hide();
-        }
+        drink_copy.editPower(drink_copy.getPowerOfCoffe()-1);
         break;
     default:
         qDebug() << "Nie zaznaczono checkboxa";
     }
-
+    updateEditButtonsVisibility();
     updateCoffeValues();
 }
 
 
 void MenuWindow::on_make_coffe_button_clicked()
 {
-    Tdrinks* drink = drinks[currentCoffeId];
-    if(machine.makeCoffee(drink->getName())){
+    if(machine.makeCoffee(drink_copy)){
         if (!makingWindow) {
            makingWindow = new makingwindow(nullptr);
 
@@ -259,6 +266,6 @@ void MenuWindow::on_make_coffe_button_clicked()
         makingWindow->show();
     }
     else{
-        qDebug() << "Brak składników";
+        qDebug() << "Brak składników ";
     }
 }

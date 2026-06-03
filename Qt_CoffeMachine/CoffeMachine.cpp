@@ -132,14 +132,14 @@ void CoffeMachine::printStatus()
 	std::cout << "\n\n\n";
 }
 
-bool CoffeMachine::makeCoffee(std::string drinkName) {
-	Tdrinks* drink = Tdrinks::getDrinkByName(drinkName);  // wskaźnik
-	if (drink == nullptr) {
+bool CoffeMachine::makeCoffee(Tdrinks drink) {
+    //Tdrinks* base_drink = Tdrinks::getDrinkByName(drink.getName());  // wskaźnik
+    if (Tdrinks::getDrinkByName(drink.getName()) == nullptr) {
 		std::cout << "Nie ma takiego napoju\n\n";
 		return false;
 	}
 
-	if (!checkIngredientsFor(*drink)) {  
+    if (!checkIngredientsFor(drink)) {
 		updateMachineStatus();
 		std::cout << "Kawa nie zostala przygotowana z powodu niewystarczajacych skladnikow\n\n";
 		return false;
@@ -150,15 +150,15 @@ bool CoffeMachine::makeCoffee(std::string drinkName) {
 		std::cout << "Maszyna wymaga czyszczenia po " << cupsSinceLastCleaning << " kawach!\n";
 	}
 
-	drink->show();  
-	water.consume(drink->getVolumeOfWater());  
-	beans.consume(drink->getAmountOfCoffee());  
-	milk.consume(drink->getVolumeOfMilk());     
+    drink.show();
+    water.consume(drink.getVolumeOfWater());
+    beans.consume(drink.getAmountOfCoffee());
+    milk.consume(drink.getVolumeOfMilk());
 
 	cupsServed++;
 	cupsSinceLastCleaning++;
 
-    std::string historyEntry="Made " + drink->getName() + " (Cup #" + std::to_string(cupsServed) + ")";
+    std::string historyEntry="Made " + drink.getName() + " (Cup #" + std::to_string(cupsServed) + ")";
     history.push_back(historyEntry);
 
     updateMachineStatus();
