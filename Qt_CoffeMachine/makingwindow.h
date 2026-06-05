@@ -1,8 +1,11 @@
 #ifndef MAKINGWINDOW_H
 #define MAKINGWINDOW_H
 
+
 #include <QWidget>
 #include <QTimer>
+#include "cupwidget.h"
+#include "Tdrinks.h"
 
 class MainWindow;
 
@@ -15,12 +18,13 @@ class makingwindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit makingwindow(QWidget *parent = nullptr);
+    explicit makingwindow(Tdrinks drink, QWidget *parent = nullptr);
     ~makingwindow();
 
 private:
     Ui::makingwindow *ui;
     MainWindow *mainWindow = nullptr;
+    Tdrinks currentDrink;
 
 };
 
