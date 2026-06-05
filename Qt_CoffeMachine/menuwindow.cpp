@@ -22,7 +22,7 @@ MenuWindow::MenuWindow(QWidget *parent)
     ui->setupUi(this);
     setFixedSize(800, 550);
     this->installEventFilter(this);
-    ui->previous_button->hide();
+    ui->previous_button->show();
     ui->next_button->show();
     MenuWindow::updateCoffeName();
     MenuWindow::updateCoffeValues();
