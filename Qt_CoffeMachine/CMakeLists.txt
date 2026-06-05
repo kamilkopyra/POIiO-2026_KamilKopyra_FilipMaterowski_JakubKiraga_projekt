@@ -32,6 +32,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Tdrinks.h Tdrinks.cpp
         resource.qrc
         makingwindow.h makingwindow.cpp makingwindow.ui
+        cupwidget.cpp cupwidget.h
+        editdrinksmenu.cpp editdrinksmenu.h editdrinksmenu.ui statusmenu.cpp statusmenu.h statusmenu.ui
+        addingredientsmenu.cpp addingredientsmenu.h addingredientsmenu.ui
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -73,11 +73,9 @@ void MenuWindow::updateCoffeValues(){
 
 void MenuWindow::on_next_button_clicked()
 {
-    if (currentCoffeId == 0) {
-        ui->previous_button->show();
-    }
-
-    currentCoffeId++;
+    if (currentCoffeId == drinks.size()-1) {
+        currentCoffeId = 0;
+    } else {    currentCoffeId++;   }
     drink_copy = Tdrinks(*drinks[currentCoffeId]);
     updateCoffeName();
     updateCoffeValues();
@@ -96,18 +94,12 @@ void MenuWindow::on_next_button_clicked()
 
 void MenuWindow::on_previous_button_clicked()
 {
-    if (currentCoffeId == drinks.size() - 1) {
-        ui->next_button->show();
-    }
-
-    currentCoffeId--;
+    if (currentCoffeId == 0) {
+        currentCoffeId = drinks.size() - 1;
+    } else {    currentCoffeId--;   }
     drink_copy = Tdrinks(*drinks[currentCoffeId]);
     updateCoffeName();
     updateCoffeValues();
-
-    if(currentCoffeId==0){
-        ui->previous_button->hide();
-    }
 
     ui->add_button->hide();
     ui->subtract_button->hide();
