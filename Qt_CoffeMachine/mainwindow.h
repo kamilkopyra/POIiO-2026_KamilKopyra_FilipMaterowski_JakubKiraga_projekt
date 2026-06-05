@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "menuwindow.h"
+#include "addingredientsmenu.h"
+#include "statusmenu.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,5 +28,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     MenuWindow *menuWindow = nullptr;
+
+    AddIngredientsMenu *ind_menu = nullptr;
+    statusMenu *stat_menu = nullptr;
 };
 #endif // MAINWINDOW_H

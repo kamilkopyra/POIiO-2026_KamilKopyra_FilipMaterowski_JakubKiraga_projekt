@@ -22,13 +22,32 @@ MenuWindow::MenuWindow(QWidget *parent)
     ui->setupUi(this);
     setFixedSize(800, 550);
     this->installEventFilter(this);
-    ui->previous_button->show();
-    ui->next_button->show();
     MenuWindow::updateCoffeName();
     MenuWindow::updateCoffeValues();
 
-    //ui->add_button->hide();
-    //ui->subtract_button->hide();
+    ind_menu = new AddIngredientsMenu(this);
+    stat_menu = new statusMenu(this);
+
+    ind_menu->setWindowFlags(Qt::Window);
+    stat_menu->setWindowFlags(Qt::Window);
+
+    connect(ind_menu,
+            &AddIngredientsMenu::Water_added,
+            stat_menu,
+            &statusMenu::Water_val_changed);
+
+    connect(ind_menu,
+            &AddIngredientsMenu::Milk_added,
+            stat_menu,
+            &statusMenu::Milk_val_changed);
+
+    connect(ind_menu,
+            &AddIngredientsMenu::Beans_added,
+            stat_menu,
+            &statusMenu::Beans_val_changed);
+
+    ui->add_button->hide();
+    ui->subtract_button->hide();
 
 }
 
@@ -277,9 +296,12 @@ void MenuWindow::on_settings_button_clicked()
 
     connect(menu, &QMenu::triggered, this, [this](QAction *action) {
         if (action->text() == "Dodaj składniki") {
-            AddIngredientsMenu *dialog = new AddIngredientsMenu(this);
-            dialog->setWindowFlags(Qt::Window);
-            dialog->show();
+            // AddIngredientsMenu *dialog = new AddIngredientsMenu(this);
+            // dialog->setWindowFlags(Qt::Window);
+            // dialog->show();
+            ind_menu->show();
+            ind_menu->raise();
+            ind_menu->activateWindow();
         }
         if (action->text() == "Edytuj menu napojów") {
             EditDrinksMenu *dialog = new EditDrinksMenu(this);
@@ -287,9 +309,12 @@ void MenuWindow::on_settings_button_clicked()
             dialog->show();
         }
         if (action->text() == "Status") {
-            statusMenu *dialog = new statusMenu(this);
-            dialog->setWindowFlags(Qt::Window);
-            dialog->show();
+            // statusMenu *dialog = new statusMenu(this);
+            // dialog->setWindowFlags(Qt::Window);
+            // dialog->show();
+            stat_menu->show();
+            stat_menu->raise();
+            stat_menu->activateWindow();
         }
     });
 

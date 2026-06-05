@@ -17,6 +17,11 @@ public:
 
 private:
     Ui::statusMenu *ui;
+
+public slots:
+    void Water_val_changed();
+    void Milk_val_changed();
+    void Beans_val_changed();
 };
 
 #endif // STATUSMENU_H

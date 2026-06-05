@@ -3,6 +3,8 @@
 
 #include "makingwindow.h"
 #include <QWidget>
+#include "addingredientsmenu.h"
+#include "statusmenu.h"
 
 namespace Ui {
 class MenuWindow;
@@ -21,6 +23,9 @@ public:
     void updateCoffeValues();
 
     void updateEditButtonsVisibility();
+
+    AddIngredientsMenu *ind_menu = nullptr;
+    statusMenu *stat_menu = nullptr;
 
 
 private slots:

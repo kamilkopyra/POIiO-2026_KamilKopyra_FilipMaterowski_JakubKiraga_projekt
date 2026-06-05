@@ -33,6 +33,9 @@ void AddIngredientsMenu::on_addButton_clicked()
     machine.addWater(ui->waterSlider->value());
     machine.addMilk(ui->milkSlider->value());
     machine.addBeans(ui->beanSlider->value());
+    Water_added();
+    Milk_added();
+    Beans_added();
 
     // ui->waterSlider->setValue(0);
     // ui->milkSlider->setValue(0);

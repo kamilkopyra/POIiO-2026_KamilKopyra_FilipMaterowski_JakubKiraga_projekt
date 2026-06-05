@@ -20,6 +20,11 @@ private slots:
 
 private:
     Ui::AddIngredientsMenu *ui;
+
+signals:
+    void Water_added();
+    void Milk_added();
+    void Beans_added();
 };
 
 #endif // ADDINGREDIENTSMENU_H

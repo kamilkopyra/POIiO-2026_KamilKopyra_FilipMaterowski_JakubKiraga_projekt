@@ -2,6 +2,7 @@
 #include "menuwindow.h"
 #include "./ui_mainwindow.h"
 #include "addingredientsmenu.h"
+#include "statusmenu.h"
 
 #include <QMenu>
 
@@ -14,6 +15,30 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pixmap("://Coffe.png");
     ui->Cup_image->setPixmap(pixmap);
     ui->Cup_image->setScaledContents(true);
+
+    ind_menu = new AddIngredientsMenu(this);
+    stat_menu = new statusMenu(this);
+
+    ind_menu->setWindowFlags(Qt::Window);
+    stat_menu->setWindowFlags(Qt::Window);
+
+    qDebug() << "ind_menu:" << ind_menu;
+    qDebug() << "stat_menu:" << stat_menu;
+
+    connect(ind_menu,
+            &AddIngredientsMenu::Water_added,
+            stat_menu,
+            &statusMenu::Water_val_changed);
+
+    connect(ind_menu,
+            &AddIngredientsMenu::Milk_added,
+            stat_menu,
+            &statusMenu::Milk_val_changed);
+
+    connect(ind_menu,
+            &AddIngredientsMenu::Beans_added,
+            stat_menu,
+            &statusMenu::Beans_val_changed);
 }
 
 MainWindow::~MainWindow()
