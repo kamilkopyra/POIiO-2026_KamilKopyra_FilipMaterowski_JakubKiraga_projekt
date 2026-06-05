@@ -134,11 +134,11 @@ void CoffeMachine::printStatus()
 
 bool CoffeMachine::makeCoffee(Tdrinks drink) {
     //Tdrinks* base_drink = Tdrinks::getDrinkByName(drink.getName());  // wskaźnik
-    if (Tdrinks::getDrinkByName(drink.getName()) == nullptr) {
+    /*if (Tdrinks::getDrinkByName(drink.getName()) == nullptr) {
 		std::cout << "Nie ma takiego napoju\n\n";
 		return false;
 	}
-
+    */
     if (!checkIngredientsFor(drink)) {
 		updateMachineStatus();
 		std::cout << "Kawa nie zostala przygotowana z powodu niewystarczajacych skladnikow\n\n";
