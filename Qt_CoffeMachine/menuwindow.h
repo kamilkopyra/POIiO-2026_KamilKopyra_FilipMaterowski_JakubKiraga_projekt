@@ -22,6 +22,7 @@ public:
 
     void updateEditButtonsVisibility();
 
+
 private slots:
 
     void on_next_button_clicked();
@@ -39,6 +40,9 @@ private slots:
     void on_subtract_button_pressed();
 
     void on_make_coffe_button_clicked();
+
+    void on_settings_button_clicked();
+
 
 private:
     Ui::MenuWindow *ui;
