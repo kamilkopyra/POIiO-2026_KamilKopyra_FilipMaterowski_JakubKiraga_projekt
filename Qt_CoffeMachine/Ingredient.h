@@ -16,6 +16,8 @@ public:
     void consume(int value);
     void refill(int value);
 
+
+
 private:
     std::string name;
     int amount;

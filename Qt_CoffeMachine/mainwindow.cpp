@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "menuwindow.h"
 #include "./ui_mainwindow.h"
+#include "addingredientsmenu.h"
 
 #include <QMenu>
 
@@ -9,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    setFixedSize(800, 550);
     QPixmap pixmap("://Coffe.png");
     ui->Cup_image->setPixmap(pixmap);
     ui->Cup_image->setScaledContents(true);
@@ -46,7 +47,8 @@ void MainWindow::on_Settings_button_clicked()
     menu->addSeparator();
     menu->addAction("Statystyka");
 
-    connect(menu, &QMenu::triggered, this, [](QAction *action) {
+    connect(menu, &QMenu::triggered, this, [this](QAction *action) {
+
         qDebug() << "Wybrano: " << action -> text();
     });
 

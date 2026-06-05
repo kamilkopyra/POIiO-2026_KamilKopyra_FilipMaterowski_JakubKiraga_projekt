@@ -4,59 +4,72 @@
 #include "Tdrinks.h"
 #include <vector>
 
-class CoffeMachine 
+class CoffeMachine
 {
 public:
-	CoffeMachine();
-	~CoffeMachine() = default;
+    CoffeMachine();
+    ~CoffeMachine() = default;
 
-	void updateMachineStatus();
+    void updateMachineStatus();
 
-	int getMachineStatistics();
-	int diagnoseMachine();
-	int repairMachine();
-	
+    int getMachineStatistics();
+    int diagnoseMachine();
+    int repairMachine();
+
     bool makeCoffee(Tdrinks drink);
-	void initializeMachine();
-	void addWater(int amount);
-	void addBeans(int amount);
-	void addMilk(int amount);
-	
-	void descaling();
-	void cleanMachine();
-	std::vector<std::string> getHistory();
+    void initializeMachine();
+    void addWater(int amount);
+    void addBeans(int amount);
+    void addMilk(int amount);
+
+    void descaling();
+    void cleanMachine();
+    std::vector<std::string> getHistory();
 
 
-	void printStatus();
-	void printHistory();
+    void printStatus();
+    void printHistory();
 
     void resetMachine();
     void deleteHistory();
+
+
+    int getMaxWater() { return water.getCapacity(); }
+    int getMaxMilk() { return milk.getCapacity(); }
+    int getMaxBeans() { return beans.getCapacity(); }
+
+    int getCupsServed()  { return cupsServed; }
+    bool getIsClean()    { return isClean; }
+    bool getIsOperational() { return isOperational; }
+    int getCupsSinceLastCleaning() { return cupsSinceLastCleaning; }
+    int getWaterAmount() { return water.getAmount(); }
+    int getMilkAmount()  { return milk.getAmount(); }
+    int getBeansAmount() { return beans.getAmount(); }
 private:
-	Ingredient water;
-	Ingredient beans;
-	Ingredient milk;
+    Ingredient water;
+    Ingredient beans;
+    Ingredient milk;
 
-	int cupsServed;
-	int cupsSinceLastCleaning;
-	bool isOperational;
-	bool isClean;
-	bool hasWater = false;
-	bool hasBeans = false;
-	bool hasMilk = false;
+    int cupsServed;
+    int cupsSinceLastCleaning;
+    bool isOperational;
+    bool isClean;
+    bool hasWater = false;
+    bool hasBeans = false;
+    bool hasMilk = false;
 
 
-	int maxWaterCapacity = 2000; // in milliliters
-	int maxBeansCapacity = 500; // in grams
-	int maxMilkCapacity = 1000; // in milliliters
+    int maxWaterCapacity = 2000; // in milliliters
+    int maxBeansCapacity = 500; // in grams
+    int maxMilkCapacity = 1000; // in milliliters
 
-	int waterMinThreshold = 200; // in milliliters
-	int beansMinThreshold = 50; // in grams
-	int milkMinThreshold = 100; // in milliliters
+    int waterMinThreshold = 200; // in milliliters
+    int beansMinThreshold = 50; // in grams
+    int milkMinThreshold = 100; // in milliliters
 
-	bool checkIngredientsFor(Tdrinks drink);
-	void checkIngredientsForFeedback(Tdrinks drink);
-	std::vector<std::string> history;
+    bool checkIngredientsFor(Tdrinks drink);
+    void checkIngredientsForFeedback(Tdrinks drink);
+    std::vector<std::string> history;
 
     void loadDrinksToVector();
     void insertIntoDatebase();
