@@ -98,11 +98,6 @@ void MenuWindow::on_next_button_clicked()
     drink_copy = Tdrinks(*drinks[currentCoffeId]);
     updateCoffeName();
     updateCoffeValues();
-
-    if (currentCoffeId >= drinks.size() - 1) {
-        ui->next_button->hide();
-    }
-
     ui->add_button->hide();
     ui->subtract_button->hide();
     ui->Power_checkbox->setChecked(false);
