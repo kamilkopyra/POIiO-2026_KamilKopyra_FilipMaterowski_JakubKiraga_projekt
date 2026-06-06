@@ -67,6 +67,8 @@ void MainWindow::on_Settings_button_clicked()
 {
     QMenu *menu = new QMenu(this);
 
+    menu->addAction("Status");
+    menu->addAction("Dodaj składniki");
     menu->addAction("Motyw");
     menu->addAction("Język");
     menu->addSeparator();
@@ -75,7 +77,24 @@ void MainWindow::on_Settings_button_clicked()
     connect(menu, &QMenu::triggered, this, [this](QAction *action) {
 
         qDebug() << "Wybrano: " << action -> text();
-    });
+
+            // if (action->text() == "Dodaj składniki") {
+            //     // AddIngredientsMenu *dialog = new AddIngredientsMenu(this);
+            //     // dialog->setWindowFlags(Qt::Window);
+            //     // dialog->show();
+            //     ind_menu->show();
+            //     ind_menu->raise();
+            //     ind_menu->activateWindow();
+            // }
+            // if (action->text() == "Status") {
+            //     // statusMenu *dialog = new statusMenu(this);
+            //     // dialog->setWindowFlags(Qt::Window);
+            //     // dialog->show();
+            //     stat_menu->show();
+            //     stat_menu->raise();
+            //     stat_menu->activateWindow();
+            // }
+        });
 
     menu->exec(ui->Settings_button->mapToGlobal(
         ui->Settings_button->rect().bottomLeft()));
