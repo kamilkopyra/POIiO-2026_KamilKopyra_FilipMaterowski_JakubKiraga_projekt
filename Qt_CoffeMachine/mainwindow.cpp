@@ -66,36 +66,36 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_Settings_button_clicked()
 {
     QMenu *menu = new QMenu(this);
+<<<<<<< HEAD
 
 
+=======
+    // menu->addAction("Status");
+    // menu->addAction("Dodaj składniki");
+    // menu->addSeparator();
+>>>>>>> 478b016c96142713a344af7e703eca990b29740c
     menu->addAction("Motyw");
     menu->addAction("Język");
-    menu->addSeparator();
-    menu->addAction("Statystyka");
 
     connect(menu, &QMenu::triggered, this, [this](QAction *action) {
-
         qDebug() << "Wybrano: " << action -> text();
-
-            // if (action->text() == "Dodaj składniki") {
-            //     // AddIngredientsMenu *dialog = new AddIngredientsMenu(this);
-            //     // dialog->setWindowFlags(Qt::Window);
-            //     // dialog->show();
-            //     ind_menu->show();
-            //     ind_menu->raise();
-            //     ind_menu->activateWindow();
-            // }
-            // if (action->text() == "Status") {
-            //     // statusMenu *dialog = new statusMenu(this);
-            //     // dialog->setWindowFlags(Qt::Window);
-            //     // dialog->show();
-            //     stat_menu->show();
-            //     stat_menu->raise();
-            //     stat_menu->activateWindow();
-            // }
-        });
-
+        // if (action->text() == "Dodaj składniki") {
+        //     // AddIngredientsMenu *dialog = new AddIngredientsMenu(this);
+        //     // dialog->setWindowFlags(Qt::Window);
+        //     // dialog->show();
+        //     ind_menu->show();
+        //     ind_menu->raise();
+        //     ind_menu->activateWindow();
+        // }
+        // if (action->text() == "Status") {
+        //     // statusMenu *dialog = new statusMenu(this);
+        //     // dialog->setWindowFlags(Qt::Window);
+        //     // dialog->show();
+        //     stat_menu->show();
+        //     stat_menu->raise();
+        //     stat_menu->activateWindow();
+        // }
+    });
     menu->exec(ui->Settings_button->mapToGlobal(
         ui->Settings_button->rect().bottomLeft()));
 }
-
