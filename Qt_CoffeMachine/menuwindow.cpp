@@ -1,5 +1,6 @@
 #include <QTimer>
 
+#include "mainwindow.h"
 #include "menuwindow.h"
 #include "ui_menuwindow.h"
 #include "CoffeMachine.h"
@@ -341,3 +342,21 @@ void MenuWindow::on_settings_button_clicked()
     menu->exec(ui->settings_button->mapToGlobal(
         ui->settings_button->rect().bottomLeft()));
 }
+
+void MenuWindow::on_goBack_button_clicked()
+{
+    if (!mainWindow) {
+
+        mainWindow = new MainWindow(nullptr);
+
+
+        connect(mainWindow, &MainWindow::destroyed,
+                this,       &MenuWindow::show);
+    }
+
+    this->hide();
+    mainWindow->show();
+}
+
+
+

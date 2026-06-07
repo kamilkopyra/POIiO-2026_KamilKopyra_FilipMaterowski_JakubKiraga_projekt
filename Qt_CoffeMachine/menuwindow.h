@@ -50,9 +50,12 @@ private slots:
     void on_settings_button_clicked();
 
 
+    void on_goBack_button_clicked();
+
 private:
     Ui::MenuWindow *ui;
     makingwindow *makingWindow = nullptr;
+    MainWindow *mainWindow = nullptr;
     void clearSelection();
 
 protected:

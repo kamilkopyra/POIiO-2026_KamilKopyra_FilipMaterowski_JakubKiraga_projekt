@@ -203,6 +203,19 @@
     <string>Ustawienia</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="goBack_button">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>30</y>
+     <width>90</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Wróć</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setFixedSize(800, 550);
-    QPixmap pixmap("://Coffe.png");
+    QPixmap pixmap("://CoffeCup.png");
     ui->Cup_image->setPixmap(pixmap);
     ui->Cup_image->setScaledContents(true);
 
@@ -67,8 +67,7 @@ void MainWindow::on_Settings_button_clicked()
 {
     QMenu *menu = new QMenu(this);
 
-    menu->addAction("Status");
-    menu->addAction("Dodaj składniki");
+
     menu->addAction("Motyw");
     menu->addAction("Język");
     menu->addSeparator();
