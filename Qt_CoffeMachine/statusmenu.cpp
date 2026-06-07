@@ -26,6 +26,9 @@ statusMenu::statusMenu(QWidget *parent)
         ui->cleanLabel->setText("Czystość: " + QString(machine.getIsClean() ? "✓ Czysta" : "✗ Wymaga czyszczenia"));
         ui->operationalLabel->setText("Status: " + QString(machine.getIsOperational() ? "✓ Sprawna" : "✗ Niesprawna"));
         ui->numberLabel->setText("Kaw od czyszczenia: " + QString::number(machine.getCupsSinceLastCleaning()));
+        ui->cupsServedLabel->setText("Podanych kaw łącznie: " + QString::number(machine.getCupsServed()));
+
+
     });
     refreshTimer->start(1000);
 
