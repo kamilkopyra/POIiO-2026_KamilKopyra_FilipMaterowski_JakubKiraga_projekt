@@ -139,6 +139,17 @@ bool CoffeMachine::makeCoffee(Tdrinks drink) {
 		return false;
 	}
     */
+
+    if (rand() % 100 == 0) {
+        isOperational = false;
+        std::string historyEntry = "Machine malfunction";
+        history.push_back(historyEntry);
+        updateDatebase();
+        updateHistoryDatebase(historyEntry);
+        std::cout << "Maszyna sie zepsula\n";
+        return false;
+    }
+
     if (!checkIngredientsFor(drink)) {
 		updateMachineStatus();
 		std::cout << "Kawa nie zostala przygotowana z powodu niewystarczajacych skladnikow\n\n";
