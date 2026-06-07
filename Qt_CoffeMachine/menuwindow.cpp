@@ -273,6 +273,18 @@ void MenuWindow::on_subtract_button_pressed()
 
 void MenuWindow::on_make_coffe_button_clicked()
 {
+
+    if (!machine.getIsClean()) {
+        QMessageBox::warning(this, "Ostrzeżenie",
+                             "Maszyna wymaga czyszczenia!\nSkorzystaj z opcji Serwis w ustawieniach.");
+    }
+
+    if (!machine.getIsOperational()) {
+        QMessageBox::critical(this, "Błąd",
+                              "Maszyna jest niesprawna!\nSkontaktuj się z serwisantem.");
+        return;
+    }
+
     if(machine.makeCoffee(drink_copy)){
 
             makingWindow = new makingwindow(drink_copy, nullptr);
