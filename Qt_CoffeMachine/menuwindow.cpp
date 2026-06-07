@@ -9,6 +9,7 @@
 #include "statusmenu.h"
 #include <QMenu>
 #include <QMessageBox>
+#include "servicewindow.h"
 
 int currentCoffeId=0;
 int checkBoxId=0;
@@ -336,6 +337,13 @@ void MenuWindow::on_settings_button_clicked()
             stat_menu->raise();
             stat_menu->activateWindow();
         }
+        if (action->text() == "Serwis") {
+            serviceWindow *dialog = new serviceWindow(this);
+            dialog->setWindowFlags(Qt::Window);
+            dialog->show();
+        }
+
+
     });
 
     menu->exec(ui->settings_button->mapToGlobal(
