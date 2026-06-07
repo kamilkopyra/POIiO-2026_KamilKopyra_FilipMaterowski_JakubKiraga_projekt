@@ -86,6 +86,8 @@ void EditDrinksMenu::on_modifyDrinkButton_clicked()
     qDebug() << "Query result:" << query.exec();
     qDebug() << "Query error:" << query.lastError().text();
 
+    emit drinksModified();
+
     // Dopóki nie kliknie się czegoś w oknie menuWindow to zmiany są niewidoczne jeśli chodzi o modyfikacje istniejącego napoju
     // Za dużo roboty, jeśli komuś się chce to może tu wrócić, zapraszam
 }

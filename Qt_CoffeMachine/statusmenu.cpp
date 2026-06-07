@@ -3,6 +3,7 @@
 #include "CoffeMachine.h"
 #include "addingredientsmenu.h"
 #include <QDebug>
+#include <QTimer>
 
 statusMenu::statusMenu(QWidget *parent)
     : QFrame(parent)
@@ -16,6 +17,17 @@ statusMenu::statusMenu(QWidget *parent)
     ui->cleanLabel->setText("Czystość: " + QString(machine.getIsClean() ? "✓ Czysta" : "✗ Wymaga czyszczenia"));
     ui->operationalLabel->setText("Status: " + QString(machine.getIsOperational() ? "✓ Sprawna" : "✗ Niesprawna"));
     ui->numberLabel->setText("Kaw od czyszczenia: " + QString::number(machine.getCupsSinceLastCleaning()));
+
+    QTimer *refreshTimer = new QTimer(this);
+    connect(refreshTimer, &QTimer::timeout, this, [=]() {
+        ui->waterLabel->setText("Woda: " + QString::number(machine.getWaterAmount()) + " ml");
+        ui->milkLabel->setText("Mleko: " + QString::number(machine.getMilkAmount()) + " ml");
+        ui->beanLabel->setText("Ziarna: " + QString::number(machine.getBeansAmount()) + " g");
+        ui->cleanLabel->setText("Czystość: " + QString(machine.getIsClean() ? "✓ Czysta" : "✗ Wymaga czyszczenia"));
+        ui->operationalLabel->setText("Status: " + QString(machine.getIsOperational() ? "✓ Sprawna" : "✗ Niesprawna"));
+        ui->numberLabel->setText("Kaw od czyszczenia: " + QString::number(machine.getCupsSinceLastCleaning()));
+    });
+    refreshTimer->start(1000);
 
     // AddIngredientsMenu *ind_menu(nullptr);
     // connect(ind_menu, &AddIngredientsMenu::Water_added, this, &statusMenu::Water_val_changed);

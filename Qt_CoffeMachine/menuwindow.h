@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "addingredientsmenu.h"
 #include "statusmenu.h"
+#include "editdrinksmenu.h"
 
 namespace Ui {
 class MenuWindow;

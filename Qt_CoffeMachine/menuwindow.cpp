@@ -8,6 +8,7 @@
 #include "editdrinksmenu.h"
 #include "statusmenu.h"
 #include <QMenu>
+#include <QMessageBox>
 
 int currentCoffeId=0;
 int checkBoxId=0;
@@ -24,6 +25,12 @@ MenuWindow::MenuWindow(QWidget *parent)
     this->installEventFilter(this);
     MenuWindow::updateCoffeName();
     MenuWindow::updateCoffeValues();
+
+    QTimer *refreshTimer = new QTimer(this);
+    connect(refreshTimer, &QTimer::timeout, this, [=]() {
+        updateCoffeValues();
+    });
+    refreshTimer->start(1000);
 
     ind_menu = new AddIngredientsMenu(this);
     stat_menu = new statusMenu(this);
@@ -276,6 +283,8 @@ void MenuWindow::on_make_coffe_button_clicked()
     }
     else{
         qDebug() << "Brak składników ";
+        QMessageBox::warning(this, "Brak składników",
+                             "Nie można przygotować napoju.\nSprawdź poziom składników w ustawieniach.");
     }
 }
 
@@ -301,6 +310,10 @@ void MenuWindow::on_settings_button_clicked()
         if (action->text() == "Edytuj menu napojów") {
             EditDrinksMenu *dialog = new EditDrinksMenu(this);
             dialog->setWindowFlags(Qt::Window);
+            connect(dialog, &EditDrinksMenu::drinksModified, this, [=]() {
+                drink_copy = Tdrinks(*drinks[currentCoffeId]);
+                updateCoffeValues();
+            });
             dialog->show();
         }
         if (action->text() == "Status") {
