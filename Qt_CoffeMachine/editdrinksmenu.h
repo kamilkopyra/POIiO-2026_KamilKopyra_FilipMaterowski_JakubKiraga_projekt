@@ -14,6 +14,8 @@ public:
     explicit EditDrinksMenu(QWidget *parent = nullptr);
     ~EditDrinksMenu();
 
+signals:
+    void drinksModified();
 
 private slots:
     void on_addDrinkButton_clicked();
