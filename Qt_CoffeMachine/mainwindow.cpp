@@ -25,20 +25,20 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "ind_menu:" << ind_menu;
     qDebug() << "stat_menu:" << stat_menu;
 
-    connect(ind_menu,
-            &AddIngredientsMenu::Water_added,
-            stat_menu,
-            &statusMenu::Water_val_changed);
 
-    connect(ind_menu,
-            &AddIngredientsMenu::Milk_added,
-            stat_menu,
-            &statusMenu::Milk_val_changed);
+    QAction *actionDefault = new QAction(" Domyślny", this);
+    QAction *actionLight   = new QAction(" Jasny",    this);
+    QAction *actionDark    = new QAction(" Ciemny",   this);
 
-    connect(ind_menu,
-            &AddIngredientsMenu::Beans_added,
-            stat_menu,
-            &statusMenu::Beans_val_changed);
+    ui->menu->addAction(actionDefault);
+    ui->menu->addAction(actionLight);
+    ui->menu->addAction(actionDark);
+
+
+    connect(actionDefault, &QAction::triggered, this, [this]() { setTheme(0); });
+    connect(actionLight,   &QAction::triggered, this, [this]() { setTheme(1); });
+    connect(actionDark,    &QAction::triggered, this, [this]() { setTheme(2); });
+
 }
 
 MainWindow::~MainWindow()
@@ -63,39 +63,110 @@ void MainWindow::on_pushButton_2_clicked()
 }
 
 
-void MainWindow::on_Settings_button_clicked()
+    // void MainWindow::on_Settings_button_clicked()
+    // {
+    //     ui->menu->clear(); // czyścimy żeby nie duplikowały się akcje przy każdym kliknięciu
+
+    //     // Sekcja motywu
+    //     QAction *labelMotyw = new QAction("— Motyw —", this);
+    //     labelMotyw->setEnabled(false); // tylko label, nie klikalny
+    //     ui->menu->addAction(labelMotyw);
+
+    //     QAction *actionDefault = new QAction("🖥️ Domyślny", this);
+    //     QAction *actionLight   = new QAction("☀️ Jasny",    this);
+    //     QAction *actionDark    = new QAction("🌙 Ciemny",   this);
+
+    //     ui->menu->addAction(actionDefault);
+    //     ui->menu->addAction(actionLight);
+    //     ui->menu->addAction(actionDark);
+
+    //     ui->menu->addSeparator();
+    //     ui->menu->addAction("Język");
+
+    //     connect(actionDefault, &QAction::triggered, this, [this]() { setTheme(0); });
+    //     connect(actionLight,   &QAction::triggered, this, [this]() { setTheme(1); });
+    //     connect(actionDark,    &QAction::triggered, this, [this]() { setTheme(2); });
+
+    //     // Pokazujemy menu pod przyciskiem
+    //     ui->menu->exec(ui->Settings_button->mapToGlobal(
+    //         ui->Settings_button->rect().bottomLeft()));
+    // }
+
+void MainWindow::setTheme(int theme)
 {
-    QMenu *menu = new QMenu(this);
-<<<<<<< HEAD
+    currentTheme = theme;
 
+    switch (theme) {
+    case 0: // Domyślny
+        qApp->setStyleSheet("");
+        break;
 
-=======
-    // menu->addAction("Status");
-    // menu->addAction("Dodaj składniki");
-    // menu->addSeparator();
->>>>>>> 478b016c96142713a344af7e703eca990b29740c
-    menu->addAction("Motyw");
-    menu->addAction("Język");
+    case 1: // Jasny
+        qApp->setStyleSheet(R"(
+            QWidget {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            QPushButton {
+                background-color: #e0e0e0;
+                color: #000000;
+                border: 1px solid #aaa;
+                border-radius: 4px;
+                padding: 5px 10px;
+            }
+            QPushButton:hover {
+                background-color: #c8c8c8;
+            }
+            QLineEdit, QTextEdit, QPlainTextEdit {
+                background-color: #f5f5f5;
+                color: #000000;
+                border: 1px solid #aaa;
+            }
+            QLabel {
+                color: #000000;
+            }
+            QMenuBar {
+                background-color: #f0f0f0;
+                color: #000000;
+            }
+            QMenuBar::item:selected {
+                background-color: #dcdcdc;
+            }
+        )");
+        break;
 
-    connect(menu, &QMenu::triggered, this, [this](QAction *action) {
-        qDebug() << "Wybrano: " << action -> text();
-        // if (action->text() == "Dodaj składniki") {
-        //     // AddIngredientsMenu *dialog = new AddIngredientsMenu(this);
-        //     // dialog->setWindowFlags(Qt::Window);
-        //     // dialog->show();
-        //     ind_menu->show();
-        //     ind_menu->raise();
-        //     ind_menu->activateWindow();
-        // }
-        // if (action->text() == "Status") {
-        //     // statusMenu *dialog = new statusMenu(this);
-        //     // dialog->setWindowFlags(Qt::Window);
-        //     // dialog->show();
-        //     stat_menu->show();
-        //     stat_menu->raise();
-        //     stat_menu->activateWindow();
-        // }
-    });
-    menu->exec(ui->Settings_button->mapToGlobal(
-        ui->Settings_button->rect().bottomLeft()));
+    case 2: // Ciemny
+        qApp->setStyleSheet(R"(
+            QWidget {
+                background-color: #2b2b2b;
+                color: #f0f0f0;
+            }
+            QPushButton {
+                background-color: #3c3f41;
+                color: #f0f0f0;
+                border: 1px solid #555;
+                border-radius: 4px;
+                padding: 5px 10px;
+            }
+            QPushButton:hover {
+                background-color: #4c5052;
+            }
+            QLineEdit, QTextEdit, QPlainTextEdit {
+                background-color: #3c3f41;
+                color: #f0f0f0;
+                border: 1px solid #555;
+            }
+            QLabel {
+                color: #f0f0f0;
+            }
+            QMenuBar {
+                background-color: #3c3f41;
+                color: #f0f0f0;
+            }
+            QMenuBar::item:selected {
+                background-color: #4c5052;
+            }
+        )");
+        break;
+    }
 }

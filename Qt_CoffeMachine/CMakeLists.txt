@@ -35,6 +35,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         cupwidget.cpp cupwidget.h
         editdrinksmenu.cpp editdrinksmenu.h editdrinksmenu.ui statusmenu.cpp statusmenu.h statusmenu.ui
         addingredientsmenu.cpp addingredientsmenu.h addingredientsmenu.ui
+        servicewindow.h servicewindow.ui servicewindow.cpp
 
 
 

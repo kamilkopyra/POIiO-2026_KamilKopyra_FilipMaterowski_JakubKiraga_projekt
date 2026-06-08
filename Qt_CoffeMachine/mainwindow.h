@@ -23,7 +23,7 @@ public:
 private slots:
     void on_pushButton_2_clicked();
 
-    void on_Settings_button_clicked();
+    void setTheme(int theme);
 
 private:
     Ui::MainWindow *ui;
@@ -31,5 +31,7 @@ private:
 
     AddIngredientsMenu *ind_menu = nullptr;
     statusMenu *stat_menu = nullptr;
+
+    int currentTheme = 0;
 };
 #endif // MAINWINDOW_H
